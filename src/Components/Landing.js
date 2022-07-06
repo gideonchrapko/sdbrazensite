@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Landing = () => {
     return (
         <div>
-            <Link to="/home">Enter</Link>
+            <h1><Link to="/home">Enter</Link></h1>
         </div>
     )
 }
