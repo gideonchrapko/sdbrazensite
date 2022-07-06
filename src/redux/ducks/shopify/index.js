@@ -4,8 +4,8 @@ import Client from "shopify-buy"
 // Creates the client with Shopify-Buy and store info
 //
 // const client = Client.buildClient({
-// 	storefrontAccessToken: "your-storefront-access-token",
-// 	domain: "your-shop-name.myshopify.com",
+// 	storefrontAccessToken: "020ea0e874deada0c0baefb9150a9ff2",
+// 	domain: "bjxyz.myshopify.com",
 // })
 
 const client = Client.buildClient({
