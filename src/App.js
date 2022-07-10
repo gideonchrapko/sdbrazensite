@@ -4,7 +4,7 @@ import { useShopify } from './hooks';
 
 import Home from './Components/Home'
 import Landing from './Components/Landing'
-import Products from './Components_shopify/Products'
+// import Products from './Components_shopify/Products'
 
 import './App.css';
 

@@ -2,16 +2,21 @@ import { useSelector, useDispatch } from "react-redux"
 import Client from "shopify-buy"
 
 // Creates the client with Shopify-Buy and store info
-//
 // const client = Client.buildClient({
-// 	storefrontAccessToken: "020ea0e874deada0c0baefb9150a9ff2",
-// 	domain: "bjxyz.myshopify.com",
+// 	storefrontAccessToken: "4b6c46a2aced112dd761f80eff4c9bb1",
+// 	domain: "dabrazn1.myshopify.com",
+// })
+
+// const client = Client.buildClient({
+// 	storefrontAccessToken: "dd4d4dc146542ba7763305d71d1b3d38",
+// 	domain: "graphql.myshopify.com",
 // })
 
 const client = Client.buildClient({
-	storefrontAccessToken: "dd4d4dc146542ba7763305d71d1b3d38",
-	domain: "graphql.myshopify.com",
-})
+	storefrontAccessToken: '1cb28a121122df7d9998e35450a29f6a',
+	domain: 'jeromejahmal.myshopify.com'
+  });
+
 
 const PRODUCTS_FOUND = "shopify/PRODUCTS_FOUND"
 const PRODUCT_FOUND = "shopify/PRODUCT_FOUND"
