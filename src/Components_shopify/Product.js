@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import { useShopify } from "../hooks";
 
-export default (props) => {
-	// wont need this function
-	// function handleClick(e, product_id) {
-	// 	e.preventDefault()
-	// 	const id = product_id
-	// 	fetchProduct(id).then((res) => {
-	// 		props.history.push(`/Product/${res.id}`)
-	// 	})
-	// }
-
+export default () => {
 	const {
 		products,
 		product,
@@ -52,15 +43,15 @@ export default (props) => {
 	}, [id])
 
 	return (
-		<Container fluid style={{ height: "100vh" }}>
+		<Container fluid style={{ top: 0 }}>
 		{/* <Container className="Product-wrapper"> */}
-		<Row>
+		<Row style={{ marginTop: "10vh" }} >
 			{products &&
 				products.map((product, i) => {
 					const image = product.images[0]
 					const description = product.description && product.description.split(".")
 					return (
-							<Col lg={{span: prodLength === 1 ? 8 : `${prodLength === 2 ? 6 : 4}`, offset: prodLength === 1 ? 2 : 0 }} key={product.id + i} style={{ display: "flex" }}>
+							<Col lg={{span: prodLength === 1 ? 8 : `${prodLength === 2 ? 6 : 4}`, offset: prodLength === 1 ? 2 : 0 }} key={product.id + i} >
 								{/* image side */}
 								<div style={{ float: "left", width: "60%" }}> 
 									{image ? (
@@ -72,7 +63,7 @@ export default (props) => {
 									{/* title */}
 									<h1 style={{ fontSize: "clamp(30pt, 3vw, 80pt)" }}>{product.title}</h1>
 									{/* size */}
-									<div style={{ display: "flex" }}>
+									<div style={{ display: "flex", width: "70%", textAlign: 'center' }}>
 										{product.variants
 											&& product.variants.map((item, i) => {
 												const varWidth = 100 / product.variants.length
@@ -83,7 +74,13 @@ export default (props) => {
 															setSize(item.id.toString())
 															setClicked(i)
 														}}
-														style={{ cursor: "pointer", width: `${varWidth}%`, fontWeight: `${click === i ? 800 : 300}`, fontSize: "clamp(10pt, 3vw, 30pt)" }}
+														className='Prod-font-size'
+														style={{ 
+															cursor: "pointer", 
+															width: `${varWidth}%`, 
+															color: `${click === i ? "#FF09B1" : "black"}`,
+															border: `${click === i ? "4px solid black" : "4px solid transparent"}`
+														}}
 													>
 														{item.title}</div>
 												)
@@ -91,7 +88,7 @@ export default (props) => {
 										}
 									</div>
 									{/* description */}
-									<div className="Product__Description">
+									<div>
 										<ul className="Product__description">
 											{description &&
 												description.map((each, i) => {
@@ -101,7 +98,13 @@ export default (props) => {
 									</div>
 									{/* Add to Cart */}
 									<div>
-										<h3 style={{ cursor: "pointer" }} onClick={(e) => changeSize(size, quantity)}>Add to Cart</h3>
+										<h3 
+											style={{ cursor: "pointer" }} 
+											onClick={(e) => changeSize(size, quantity)}
+											className='Prod-cart'
+										>
+												ADD TO CART
+										</h3>
 									</div>
 								</div>
 							</Col>

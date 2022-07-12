@@ -2,6 +2,14 @@
  * ============================== */
  @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
 
+ @font-face {
+  font-family: 'fake_receiptregular';
+  src: url('./Styles/fake_receipt-webfont.woff2') format('woff2'),
+       url('./Styles/fake_receipt-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
  *,
  *:before,
  *:after {
@@ -382,120 +390,27 @@
    width: 15%;
    margin-bottom: 10px;
  }
- 
- /* SINGLE PRODUCT VIEW
-   * ============================== */
- .Product-wrapper2 {
-   max-width: 900px;
-   margin: 60px auto 0;
-   justify-content: center;
-   align-items: center;
+
+ .Prod-font-size {
+  font-size: clamp(10pt, 3vw, 30pt);
+  font-family: fake_receiptregular;
  }
- 
- .Images {
-   display: grid;
-   grid-template-columns: repeat(3, 1fr);
-   /* width: 20%; */
- }
- 
- .homeButton {
-   position: absolute;
-   top: 10px;
-   left: 50%;
- }
- 
+
  .Product__description {
-   font-size: 8px;
+  list-style-type: none;
+  margin-left: -20px;
+  font-family: fake_receiptregular;
+  font-size: 9pt;
  }
- 
- .Product__title2 {
-   font-size: 30px;
+
+ .Prod-cart {
+  font-size: 17pt;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: 800;
+  margin-left: 20pt;
+  text-decoration: underline;
  }
- 
- .Product__info {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
- }
- 
- /* CUSTOMER AUTH
-   * ============================== */
- .CustomerAuth {
-   background: #2a2c2e;
-   display: none;
-   height: 100%;
-   left: 0;
-   opacity: 0;
-   padding: 0 0 65px;
-   top: 0;
-   width: 100%;
-   text-align: center;
-   color: #fff;
-   transition: opacity 150ms;
-   opacity: 1;
-   visibility: visible;
-   z-index: 1000;
-   position: fixed;
- }
- 
- .CustomerAuth--open {
-   display: block;
- }
- 
- .CustomerAuth__close {
-   position: absolute;
-   right: 9px;
-   top: 8px;
-   font-size: 35px;
-   color: #999;
-   border: none;
-   background: transparent;
-   transition: transform 100ms ease;
-   cursor: pointer;
- }
- 
- .CustomerAuth__body {
-   padding: 130px 30px;
-   width: 700px;
-   margin-left: auto;
-   margin-right: auto;
-   text-align: left;
-   position: relative;
- }
- 
- .CustomerAuth__heading {
-   font-size: 24px;
-   font-weight: 500;
-   padding-bottom: 15px;
- }
- 
- .CustomerAuth__credential {
-   display: block;
-   position: relative;
-   margin-bottom: 15px;
-   border-radius: 3px;
- }
- 
- .CustomerAuth__input {
-   height: 60px;
-   padding: 24px 10px 20px;
-   border: 0px;
-   font-size: 18px;
-   background: #fff;
-   width: 100%;
- }
- 
- .CustomerAuth__submit {
-   float: right;
- }
- 
- .error {
-   display: block;
-   font-size: 15px;
-   padding: 10px;
-   position: relative;
-   min-height: 2.64286em;
-   background: #fbefee;
-   color: #c23628;
+
+ .Prod-cart:hover {
+  text-decoration: none
  }
