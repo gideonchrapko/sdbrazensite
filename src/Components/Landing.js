@@ -1,10 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
+import Lottie from '../Lottie/Lottie'
 
 const Landing = () => {
     return (
-        <div>
-            <h1><Link to="/home">Enter</Link></h1>
+        <div style={{ 
+            width: '100vw', 
+            textAlign: 'center',
+            height: '100vh'
+        }}>
+            <Lottie />
         </div>
     )
 }
