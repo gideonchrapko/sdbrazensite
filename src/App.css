@@ -91,6 +91,7 @@
    background: none;
    cursor: pointer;
    color: grey;
+   margin-top: 20px;
  }
  
  .button {
@@ -413,4 +414,54 @@
 
  .Prod-cart:hover {
   text-decoration: none
+ }
+
+ .nav-div{
+  /* display: inline;  */
+  margin-top: 10px;
+  position: fixed;
+  transition: transform 0.2s;
+  /* height: 100%; */
+  /* width: 10%; */
+ }
+
+ .info-nav {
+  cursor: pointer;
+  transition: margin-top 0.2s;
+  height: 100px; 
+  margin-top: 20px;
+  transition: transform 0.2s;
+ }
+
+ /* .info-nav:hover {
+  filter: invert(21%) sepia(88%) saturate(3469%) hue-rotate(305deg) brightness(97%) contrast(118%);
+  transform: translateY(5px);
+  
+ } */
+
+ .info-hovered {
+  filter: invert(21%) sepia(88%) saturate(3469%) hue-rotate(305deg) brightness(97%) contrast(118%);
+  transform: translateY(5px);
+  cursor: pointer;
+  transition: margin-top 0.2s;
+  height: 100px; 
+  margin-top: 20px;
+  transition: transform 0.2s;
+ }
+
+ .nav-text {
+  font-size: clamp(10pt, 3vw, 25pt);
+  font-family: fake_receiptregular;
+  cursor: pointer;
+  transform: opacity(0);
+  line-height: 0.8;
+  transition: transform 0.2s;
+ }
+
+ .nav-text:hover {
+  transform: opacity(1)
+ }
+
+ .nav-div:hover {
+  transition: transform 0.2s;
  }

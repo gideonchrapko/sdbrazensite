@@ -43,15 +43,17 @@ export default () => {
 	}, [id])
 
 	return (
-		<Container fluid style={{ top: 0 }}>
+		<Container fluid >
 		{/* <Container className="Product-wrapper"> */}
-		<Row style={{ marginTop: "10vh" }} >
+		<Row>
 			{products &&
 				products.map((product, i) => {
 					const image = product.images[0]
 					const description = product.description && product.description.split(".")
 					return (
-							<Col lg={{span: prodLength === 1 ? 8 : `${prodLength === 2 ? 6 : 4}`, offset: prodLength === 1 ? 2 : 0 }} key={product.id + i} >
+							<Col lg={{span: prodLength === 1 ? 8 : `${prodLength === 2 ? 6 : 4}`, offset: prodLength === 1 ? 2 : 0 }} key={product.id + i} 
+								style={{ marginTop: "15vh" }}
+							>
 								{/* image side */}
 								<div style={{ float: "left", width: "60%" }}> 
 									{image ? (

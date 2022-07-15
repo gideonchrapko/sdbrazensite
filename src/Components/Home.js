@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <Container fluid style={{ backgroundImage: `url(${Background})`, height: "100vh" }} className='home-container'>
             <Nav /> 
-			<Product/>
+			<Product />
         </Container>
     )
 }
