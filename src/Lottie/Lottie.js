@@ -17,12 +17,14 @@ export default function Example() {
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
       style={{
-        width: 300, 
-        height: 300,
+        width: '50vw', 
+        height: '50vw',
+        minWidth: 400,
+        minHeight: 400,
         cursor: 'pointer',
         filter: `${ hovered ? `invert(21%) sepia(88%) saturate(3469%) hue-rotate(305deg) brightness(97%) contrast(118%)` : ``}`,
         display: 'inline-block',
-        marginTop: '15%'
+        // marginTop: '15%'
         }}
     />
   )

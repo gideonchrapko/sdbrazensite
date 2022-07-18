@@ -1,6 +1,6 @@
 .home-container {
     background-position: top;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: contain;
     background-attachment: fixed;
 }

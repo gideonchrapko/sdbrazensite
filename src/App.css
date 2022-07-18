@@ -393,7 +393,7 @@
  }
 
  .Prod-font-size {
-  font-size: clamp(10pt, 3vw, 30pt);
+  font-size: clamp(12pt, 3vw, 30pt);
   font-family: fake_receiptregular;
  }
 
@@ -401,11 +401,11 @@
   list-style-type: none;
   margin-left: -20px;
   font-family: fake_receiptregular;
-  font-size: 9pt;
+  font-size: clamp(7pt, 2vw, 8pt);
  }
 
  .Prod-cart {
-  font-size: 17pt;
+  font-size: clamp(10pt, 3vw, 17pt);
   font-family: 'Helvetica Neue', sans-serif;
   font-weight: 800;
   margin-left: 20pt;

@@ -52,16 +52,16 @@ export default () => {
 					const description = product.description && product.description.split(".")
 					return (
 							<Col lg={{span: prodLength === 1 ? 8 : `${prodLength === 2 ? 6 : 4}`, offset: prodLength === 1 ? 2 : 0 }} key={product.id + i} 
-								style={{ marginTop: "15vh" }}
+								style={{ marginTop: `${window.innerWidth > 600 ? "15vh" : "20vh"}` }}
 							>
 								{/* image side */}
-								<div style={{ float: "left", width: "60%" }}> 
+								<div style={{ float: "left", width: `${window.innerWidth > 600 ? "60%" : "50%"}` }}> 
 									{image ? (
 										<img  src={image.src} alt={`${product.title} product shot`} />
 									) : null}
 								</div>
 								{/* info side */}
-								<div style={{ float: "right", width: "40%" }}>
+								<div style={{ float: "right", width: `${window.innerWidth > 600 ? "40%" : "50%"}` }}>
 									{/* title */}
 									<h1 style={{ fontSize: "clamp(30pt, 3vw, 80pt)" }}>{product.title}</h1>
 									{/* size */}
