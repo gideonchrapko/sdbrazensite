@@ -50,7 +50,6 @@ export default (props) => {
 
 			setCount(count)
 		}
-
 		getCount()
 	}, [cartStatus, checkoutState])
 
@@ -58,15 +57,12 @@ export default (props) => {
 		<div id="cart">
 			<div className={`Cart ${cartStatus ? "Cart--open" : ""}`}>
 				<div className="App__view-cart-wrapper2">
-					<button className="App__view-cart" onClick={(e) => handleOpen(e)}>
+					<button className="App__view-cart" onClick={(e) => cartStatus ? handleClose(e) : handleOpen(e)}>
 						<img src={Cart} style={{ height: "40px"}} />
 					</button>
 				</div>
 				<header className="Cart__header">
-					<h2>Your cart</h2>
-					<button className="Cart__close" onClick={(e) => handleClose(e)}>
-						<MdRemoveShoppingCart />
-					</button>
+					<h1>CART</h1>
 				</header>
 				<ul className="Cart__line-items">
 					<LineItem />

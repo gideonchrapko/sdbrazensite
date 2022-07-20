@@ -95,17 +95,20 @@
  }
  
  .button {
-   background-color: #2752ff;
+   background-color: black;
    color: white;
+   font-weight: 800;
    border: none;
-   font-size: 1.2rem;
-   padding: 10px 17px;
+   font-size: clamp(30pt, 6vw, 40pt);
+   border-radius: 10pt;
+   padding: 0px 17px;
    cursor: pointer;
  }
  
  .button:hover,
  .button:focus {
-   background-color: #222222;
+   /* background-color: #222222; */
+   color:rgb(235, 53, 173);
  }
  
  .button:disabled {
@@ -169,7 +172,8 @@
    background-color: white;
    display: flex;
    flex-direction: column;
-   border-left: 1px solid #e5e5e5;
+   border: 5px solid black;
+   border-radius: 30px 0px 0px 30px;
    transform: translateX(100%);
    transition: transform 0.15s ease-in-out;
    z-index: 999999999;
@@ -193,9 +197,14 @@
  
  .Cart__header {
    padding: 20px;
-   border-bottom: 1px solid #e5e5e5;
+   /* border-bottom: 1px solid #e5e5e5; */
    flex: 0 0 auto;
    display: inline-block;
+   /* font-size: clamp(20pt, 10vw, 60pt); */
+   /* font-size: 70pt; */
+   font-family: fake_receiptregular;
+   font-weight: 800;
+   color: rgb(235, 53, 173);
  }
  
  .Cart__line-items {
@@ -206,7 +215,6 @@
  
  .Cart__footer {
    padding: 20px;
-   border-top: 1px solid #e5e5e5;
    flex: 0 0 auto;
  }
  
@@ -226,7 +234,8 @@
  }
  
  .Cart-info__small {
-   font-size: 11px;
+   font-size: 15px;
+   font-weight: 800;
  }
  
  .Cart-info__pricing {
@@ -237,6 +246,8 @@
    margin-left: 5px;
    font-size: 16px;
    color: black;
+   font-family: fake_receiptregular;
+   font-weight: 800;
  }
  
  /* LINE ITEMS
@@ -277,9 +288,11 @@
  .Line-item__variant-title {
    float: right;
    font-weight: bold;
-   font-size: 11px;
+   font-size: 15px;
    line-height: 17px;
    color: #767676;
+   font-family: fake_receiptregular;
+   font-weight: 800;
  }
  
  .Line-item__title {
@@ -294,6 +307,8 @@
    font-weight: bold;
    font-size: 15px;
    margin-right: 40px;
+   font-family: fake_receiptregular;
+   font-weight: 800;
  }
  
  .Line-item__quantity-container {
@@ -308,7 +323,8 @@
    float: left;
    height: 21px;
    line-height: 16px;
-   font-family: monospace;
+   font-family: fake_receiptregular;
+   font-weight: 800;
    width: 25px;
    padding: 0;
    border: none;
@@ -335,6 +351,8 @@
    background: transparent;
    border-left: 1px solid #767676;
    border-right: 1px solid #767676;
+   font-family: fake_receiptregular;
+   font-weight: 800;
    display: block;
    float: left;
    padding: 0;
