@@ -10,8 +10,6 @@ import './App.css';
 
 function App() {
 	const {
-    darkModeStatus,
-    soundStatus,
 		createShop,
 		createCheckout,
 		fetchProducts,

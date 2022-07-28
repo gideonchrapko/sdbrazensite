@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import { useShopify } from "../hooks";
+import sanityClient from '../client';
 
 export default () => {
 	const {
 		products,
-		product,
+		// product,
 		fetchProduct,
 		openCart,
 		checkoutState,
@@ -14,16 +15,20 @@ export default () => {
 
 	// const id = props.match.params.productId
 	const id = "id"
-	const defaultSize = product.variants && product.variants[0].id.toString();
+	// const defaultSize = products.variants && products.variants[0].id.toString();
+	// const outOfStock = product.variants && product.variants[0]
 	const prodLength = products && products.length
 	const [size, setSize] = useState("");
 	const [click, setClicked] = useState();
+	const [singlePost, setSinglePost] = useState();
 	const [quantity, setQuantity] = useState(1);
+	const [available, setAvailable] = useState(true);
+	const [prodIndex, setProdIndex] = useState(0);
 
 	function changeSize(sizeId, quantity) {
 		openCart()
 		if (sizeId === "") {
-			sizeId = defaultSize
+			sizeId = products[prodIndex].variants[0].id
 			const lineItemsToAdd = [
 				{ variantId: sizeId, quantity: parseInt(quantity, 10) },
 			]
@@ -41,6 +46,20 @@ export default () => {
 	useEffect(() => {
 		fetchProduct(id)
 	}, [id])
+
+	useEffect(() => {
+		sanityClient.fetch(`*[_type == "productImages"]{
+			mainImage{
+			asset->{
+			  _id,
+			  url
+			},
+			alt
+		  },
+		 }`)
+		.then((data) => setSinglePost(data))
+		.catch(console.error)
+	  },[])
 
 	return (
 		<Container fluid >
@@ -63,7 +82,13 @@ export default () => {
 								{/* info side */}
 								<div style={{ float: "right", width: `${window.innerWidth > 600 ? "40%" : "50%"}` }}>
 									{/* title */}
-									<h1 style={{ fontSize: "clamp(30pt, 3vw, 80pt)" }}>{product.title}</h1>
+									<div>
+										{singlePost && singlePost[i] ?
+											<img src={singlePost && singlePost[i].mainImage.asset.url} style={{ height: "120px" }} />
+											:
+											<h1 style={{ fontSize: "clamp(30pt, 3vw, 80pt)" }}>{product.title}</h1>
+										}
+									</div>
 									{/* size */}
 									<div style={{ display: "flex", width: "70%", textAlign: 'center' }}>
 										{product.variants
@@ -75,13 +100,14 @@ export default () => {
 														onClick={e => {
 															setSize(item.id.toString())
 															setClicked(i)
+															setAvailable(item.available)
 														}}
 														className='Prod-font-size'
 														style={{ 
 															cursor: "pointer", 
-															width: `${varWidth}%`, 
-															color: `${click === i ? "#FF09B1" : "black"}`,
-															border: `${click === i ? "4px solid black" : "4px solid transparent"}`
+															width: `${varWidth}%`,
+															color: item.available ? `${click === i ? "#FF09B1" : "black"}` : "grey",
+															border: `${click === i ? "4px solid black" : "4px solid transparent"}`,
 														}}
 													>
 														{item.title}</div>
@@ -100,14 +126,30 @@ export default () => {
 									</div>
 									{/* Add to Cart */}
 									<div>
-										<h3 
-											style={{ cursor: "pointer" }} 
-											onClick={(e) => changeSize(size, quantity)}
-											className='Prod-cart'
-										>
-												ADD TO CART
-										</h3>
+										{product.variants[0].available && available ?
+											<h3 
+												style={{ cursor: "pointer" }} 
+												onClick={(e) => {
+													changeSize(size, quantity)
+													setProdIndex(i)
+												}}
+												className='Prod-cart'
+											>
+													ADD TO CART
+											</h3>
+											:
+											<h3 
+												style={{ 
+													cursor: "not-allowed", 
+													color: "grey" 
+												}} 
+												className='Prod-cart'
+											>
+												PICK ANOTHER SIZE
+											</h3>
+										}
 									</div>
+
 								</div>
 							</Col>
 					)
@@ -116,51 +158,3 @@ export default () => {
 		</Container>
 	)
 }
-
-{/* 							
-							<div className="Product" key={product.id + i}>
-								{image ? (
-									<img src={image.src} alt={`${product.title} product shot`} />
-								) : null}
-							</div>
-							<div>
-								<div>
-									<h4 className="Product__title">{product.title}</h4>
-									<p className="Product__price">${product.variants[0].price}</p>
-								</div>
-								<div>
-							<label htmlFor={"prodOptions"}>Size</label>
-							<select
-								id="prodOptions"
-								name={size}
-								onChange={(e) => {
-									setSize(e.target.value)
-								}}
-							>
-								{product.variants &&
-									product.variants.map((item, i) => {
-										return (
-											<option
-												value={item.id.toString()}
-												key={item.title + i}
-											>{`${item.title}`}</option>
-										)
-									})}
-							</select>
-						</div>
-								<div className="Product__Description">
-									<ul className="Product__description">
-										{description &&
-											description.map((each, i) => {
-												return <li key={`line-description +${i}`}>{each}</li>
-										})}
-									</ul>
-								</div>
-								<button
-									className="Product__buy button"
-									// onClick={(e) => handleClick(e, product.id)}
-									onClick={(e) => changeSize(size, quantity)}
-								>
-									Add to Cart
-								</button>
-							</div> */}
