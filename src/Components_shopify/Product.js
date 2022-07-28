@@ -62,16 +62,15 @@ export default () => {
 	  },[])
 
 	return (
-		<Container fluid >
-		{/* <Container className="Product-wrapper"> */}
-		<Row>
-			{products &&
-				products.map((product, i) => {
-					const image = product.images[0]
-					const description = product.description && product.description.split(".")
-					return (
+		<Container fluid style={{ position: "relative", zIndex: "10" }}>
+			<Row>
+				{products &&
+					products.map((product, i) => {
+						const image = product.images[0]
+						const description = product.description && product.description.split(".")
+						return (
 							<Col lg={{span: prodLength === 1 ? 8 : `${prodLength === 2 ? 6 : 4}`, offset: prodLength === 1 ? 2 : 0 }} key={product.id + i} 
-								style={{ marginTop: `${window.innerWidth > 600 ? "15vh" : "20vh"}` }}
+								style={{ marginTop: `${window.innerWidth > 600 ? "15vh" : "23vh"}` }}
 							>
 								{/* image side */}
 								<div style={{ float: "left", width: `${window.innerWidth > 600 ? "60%" : "50%"}` }}> 
@@ -84,7 +83,7 @@ export default () => {
 									{/* title */}
 									<div>
 										{singlePost && singlePost[i] ?
-											<img src={singlePost && singlePost[i].mainImage.asset.url} style={{ height: "120px" }} />
+											<img src={singlePost && singlePost[i].mainImage.asset.url} style={{ height: "10vw", minHeight: "50pt" }} />
 											:
 											<h1 style={{ fontSize: "clamp(30pt, 3vw, 80pt)" }}>{product.title}</h1>
 										}

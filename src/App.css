@@ -468,7 +468,7 @@
  }
 
  .nav-text {
-  font-size: clamp(10pt, 3vw, 25pt);
+  font-size: clamp(16pt, 3vw, 25pt);
   font-family: fake_receiptregular;
   cursor: pointer;
   transform: opacity(0);

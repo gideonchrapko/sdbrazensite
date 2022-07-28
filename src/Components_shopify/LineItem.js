@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { useShopify } from "../hooks"
+import sanityClient from '../client';
 
 export default (props) => {
 	const { checkoutState, updateQuantity, removeLineItem } = useShopify()
+	const [singlePost, setSinglePost] = useState()
 
 	function decrementQuantity(lineItemId, lineItemQuantity, e) {
 		e.preventDefault()
@@ -24,6 +26,20 @@ export default (props) => {
 		removeLineItem(checkoutId, lineItemId)
 	}
 
+	useEffect(() => {
+		sanityClient.fetch(`*[_type == "productImages"]{
+			mainImage{
+			asset->{
+			  _id,
+			  url
+			},
+			alt
+		  },
+		 }`)
+		.then((data) => setSinglePost(data))
+		.catch(console.error)
+	  },[])
+
 	return (
 		<li className="Line-item">
 			{checkoutState.lineItems &&
@@ -43,7 +59,14 @@ export default (props) => {
 									<div className="Line-item__variant-title">
 										{lineItem.variant.title}
 									</div>
-									<span className="Line-item__title">{lineItem.title}</span>
+									<div>
+										{singlePost && singlePost[i] ?
+											<img src={singlePost && singlePost[i].mainImage.asset.url} style={{ height: "3vw", minHeight: "30pt" }} />
+											:
+											<h1 className="Line-item__title">{lineItem.title}</h1>
+										}
+									</div>
+									{/* <span className="Line-item__title">{lineItem.title}</span> */}
 								</div>
 								<div className="Line-item__content-row">
 									<div className="Line-item__quantity-container">

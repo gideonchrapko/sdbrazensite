@@ -54,7 +54,7 @@ export default (props) => {
 	}, [cartStatus, checkoutState])
 
 	return (
-		<div id="cart">
+		<div id="cart" style={{ position: "fixed", zIndex: "99"}}>
 			<div className={`Cart ${cartStatus ? "Cart--open" : ""}`}>
 				<div className="App__view-cart-wrapper2">
 					<button className="App__view-cart" onClick={(e) => cartStatus ? handleClose(e) : handleOpen(e)}>
