@@ -204,7 +204,7 @@
    /* font-size: 70pt; */
    font-family: fake_receiptregular;
    font-weight: 800;
-   color: rgb(235, 53, 173);
+   color: black;
  }
  
  .Cart__line-items {
@@ -222,6 +222,8 @@
    margin-top: 20px;
    display: block;
    width: 100%;
+   font-weight: 700;
+   font-size: clamp(30pt, 5vw, 35pt);
  }
  
  .Cart-info {

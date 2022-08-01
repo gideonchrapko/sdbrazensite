@@ -90,7 +90,7 @@ export default (props) => {
 						className="Cart__checkout button"
 						onClick={(e) => openCheckout(e)}
 					>
-						Checkout
+						CHECKOUT
 					</button>
 				</footer>
 			</div>
