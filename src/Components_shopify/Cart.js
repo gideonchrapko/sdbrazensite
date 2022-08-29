@@ -54,11 +54,11 @@ export default (props) => {
 	}, [cartStatus, checkoutState])
 
 	return (
-		<div id="cart" style={{ position: "fixed", zIndex: "99"}}>
+		<div id="cart" style={{ position: "fixed", zIndex: "99", backgroundColor: "red" }}>
 			<div className={`Cart ${cartStatus ? "Cart--open" : ""}`}>
 				<div className="App__view-cart-wrapper2">
 					<button className="App__view-cart" onClick={(e) => cartStatus ? handleClose(e) : handleOpen(e)}>
-						<img src={Cart} style={{ height: "40px"}} />
+						<img src={Cart} style={{ height: "40px" }} />
 					</button>
 				</div>
 				<header className="Cart__header">

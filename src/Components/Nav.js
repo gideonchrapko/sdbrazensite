@@ -10,9 +10,9 @@ const Nav = () => {
     const mobWidth = window.innerWidth < 600
 
     return (
-        <Container fluid style={{ position: "fixed" , top: "0", zIndex: "98" }}>
+        <Container fluid style={{ position: "relative" , top: "0", zIndex: "98", width: "100vw", backgroundColor: "red" }}>
             {mobWidth ? 
-                <div onClick={() => setHover(!hover)} >
+                <div onClick={() => setHover(!hover)} style={{ backgroundColor: "green", width: "100vw" }}>
                     <div style={{ opacity: `${hover ? "1" : "1" }` }} className='nav-div'>
                         <img src={Info} className={hover ? "info-hovered" : "info-nav"} />
                         <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}>CONTACT</h1>
@@ -20,7 +20,7 @@ const Nav = () => {
                     </div>
                 </div>
                 :
-                <div onPointerOver={() => setHover(true)} onPointerOut={() => setHover(false)}>
+                <div onPointerOver={() => setHover(true)} onPointerOut={() => setHover(false)} style={{ backgroundColor: "green", width: "100vw" }}>
                     <div style={{ opacity: `${hover ? "1" : "1" }` }} className='nav-div'>
                         <img src={Info} className={hover ? "info-hovered" : "info-nav"} />
                         <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}>CONTACT</h1>

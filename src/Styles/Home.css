@@ -3,4 +3,6 @@
     background-repeat: repeat;
     background-size: contain;
     background-attachment: fixed;
+    /* width: 100vw;
+    height: 100vh; */
 }

@@ -80,18 +80,19 @@
  }
  
  .App__view-cart-wrapper2 {
-   position: absolute;
+   position: fixed;
    top: 10px;
-   left: -65px;
+   /* left: -30px; */
+   margin-left: -80px;
+   /* background-color: green; */
  }
  
  .App__view-cart {
-   font-size: 45px;
-   border: none;
-   background: none;
-   cursor: pointer;
-   color: grey;
-   margin-top: 20px;
+  font-size: 45px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-top: 20px;
  }
  
  .button {
