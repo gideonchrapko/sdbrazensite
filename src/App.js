@@ -4,6 +4,7 @@ import { useShopify } from './hooks';
 
 import Home from './Components/Home'
 import Landing from './Components/Landing'
+import Cart from './Components_shopify/Cart'
 // import Products from './Components_shopify/Products'
 
 import './App.css';
@@ -20,17 +21,18 @@ function App() {
 		createShop()
 		fetchProducts()
 		createCheckout()
-  	// fetchCollection()
-    window.scrollTo( 0, 1 );
+  		// fetchCollection()
+    	window.scrollTo( 0, 1 );
 	}, [])
 
   return (
-    <div className="App">
-      <Routes>
-        <Route exacta path='/' element={<Landing />} />
-        <Route path="/home" element={<Home />} />
-      </Routes>
-    </div>
+		<div id="App">
+			<Routes>
+				<Route exacta path='/' element={<Landing />} />
+				<Route path="/home" element={<Home />} />
+				<Route path="/" element={<Cart/>} />
+			</Routes>
+		</div>
   );
 }
 
