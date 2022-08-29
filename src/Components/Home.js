@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
+// import { Container } from 'react-bootstrap'
 
 import Nav from './Nav'
 import Cart from '../Components_shopify/Cart'
@@ -10,15 +10,13 @@ import Background from '../Assets/SDpixelpng.png'
 
 const Home = () => {
     return (
-        <Container 
-            fluid 
-            style={{ backgroundImage: `url(${Background})`, height: "100vh", width: "100vw" }} 
+        <div style={{ backgroundImage: `url(${Background})`, height: "100vh", width: "100%", backgroundColor: "green" }} 
             className='home-container'
         >
             <Cart />
             <Nav /> 
 			<Product /> 
-        </Container>
+        </div>
     )
 }
 

@@ -30,7 +30,6 @@ function App() {
 			<Routes>
 				<Route exacta path='/' element={<Landing />} />
 				<Route path="/home" element={<Home />} />
-				<Route path="/" element={<Cart/>} />
 			</Routes>
 		</div>
   );
