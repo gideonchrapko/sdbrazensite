@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+// import { Container, Row, Col } from 'react-bootstrap'
 
-import Cart from '../Components_shopify/Cart'
+// import Cart from '../Components_shopify/Cart'
 import Info from '../Assets/Info.svg'
 
 const Nav = () => {
     const [hover, setHover] = useState(false)
-
     const mobWidth = window.innerWidth < 600
 
     return (
-        <Container fluid style={{ position: "relative" , top: "0", zIndex: "98", width: "100vw", backgroundColor: "red" }}>
+        <div style={{ position: "fixed" , top: "0", zIndex: "98", width: "100vw", backgroundColor: "blue" }}>
             {mobWidth ? 
                 <div onClick={() => setHover(!hover)} style={{ backgroundColor: "green", width: "100vw" }}>
                     <div style={{ opacity: `${hover ? "1" : "1" }` }} className='nav-div'>
@@ -28,8 +27,7 @@ const Nav = () => {
                     </div>
                 </div>            
             }
-            <Cart />
-        </Container>
+        </div>
     )
 }
 
