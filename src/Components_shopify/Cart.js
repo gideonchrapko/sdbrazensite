@@ -58,7 +58,7 @@ export default (props) => {
 			<div className={`Cart ${cartStatus ? "Cart--open" : ""}`}>
 				<div className="App__view-cart-wrapper2">
 					<button className="App__view-cart" onClick={(e) => cartStatus ? handleClose(e) : handleOpen(e)}>
-						<img src={Cart} style={{ height: "40px" }} />
+						<img src={Cart} />
 					</button>
 				</div>
 				<header className="Cart__header">

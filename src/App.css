@@ -86,12 +86,12 @@
  }
  
  .App__view-cart {
-  font-size: 45px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  margin-top: 20px;
- }
+	font-size: 45px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	color: grey;
+}
  
  .button {
    background-color: black;
