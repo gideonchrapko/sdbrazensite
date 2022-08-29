@@ -11,13 +11,10 @@ import Background from '../Assets/SDpixelpng.png'
 const Home = () => {
     return (
         <div 
-            // style={{ backgroundImage: `url(${Background})`, height: "100vh", width: "100%", backgroundColor: "green" }} 
-            // className='home-container'
+            style={{ backgroundImage: `url(${Background})`, height: "100vh", width: "100%", backgroundColor: "green" }} 
+            className='home-container'
         >
-            <div style={{ width: "99vw", background: "red", position: "fixed", zIndex: "9999"}}>
-                <Cart />
-                Hello
-            </div>
+            <Cart />
             <Nav /> 
 			<Product /> 
         </div>
