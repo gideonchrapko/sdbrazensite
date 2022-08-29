@@ -54,15 +54,18 @@ export default (props) => {
 	}, [cartStatus, checkoutState])
 
 	return (
-		<div id="cart" style={{ position: "fixed", zIndex: "99" }}>
+		<div id="cart">
 			<div className={`Cart ${cartStatus ? "Cart--open" : ""}`}>
 				<div className="App__view-cart-wrapper2">
-					<button className="App__view-cart" onClick={(e) => cartStatus ? handleClose(e) : handleOpen(e)}>
-						<img src={Cart} style={{ height: "45px" }} />
+					<button className="App__view-cart" onClick={(e) => handleOpen(e)}>
+						<MdShoppingCart />
 					</button>
 				</div>
 				<header className="Cart__header">
-					<h1>CART</h1>
+					<h2>Your cart</h2>
+					<button className="Cart__close" onClick={(e) => handleClose(e)}>
+						<MdRemoveShoppingCart />
+					</button>
 				</header>
 				<ul className="Cart__line-items">
 					<LineItem />
@@ -90,10 +93,51 @@ export default (props) => {
 						className="Cart__checkout button"
 						onClick={(e) => openCheckout(e)}
 					>
-						CHECKOUT
+						Checkout
 					</button>
 				</footer>
 			</div>
 		</div>
+		// <div id="cart" style={{ zIndex: "99" }}>
+		// 	<div className={`Cart ${cartStatus ? "Cart--open" : ""}`}>
+		// 		<div className="App__view-cart-wrapper2">
+		// 			<button className="App__view-cart" onClick={(e) => cartStatus ? handleClose(e) : handleOpen(e)}>
+		// 				<img src={Cart} style={{ height: "45px" }} />
+		// 			</button>
+		// 		</div>
+		// 		<header className="Cart__header">
+		// 			<h1>CART</h1>
+		// 		</header>
+		// 		<ul className="Cart__line-items">
+		// 			<LineItem />
+		// 		</ul>
+		// 		<footer className="Cart__footer">
+		// 			<div className="Cart-info clearfix">
+		// 				<div className="Cart-info__total Cart-info__small">Subtotal</div>
+		// 				<div className="Cart-info__pricing">
+		// 					<span className="pricing">$ {checkoutState.subtotalPrice}</span>
+		// 				</div>
+		// 			</div>
+		// 			<div className="Cart-info clearfix">
+		// 				<div className="Cart-info__total Cart-info__small">Taxes</div>
+		// 				<div className="Cart-info__pricing">
+		// 					<span className="pricing">$ {checkoutState.totalTax}</span>
+		// 				</div>
+		// 			</div>
+		// 			<div className="Cart-info clearfix">
+		// 				<div className="Cart-info__total Cart-info__small">Total</div>
+		// 				<div className="Cart-info__pricing">
+		// 					<span className="pricing">$ {checkoutState.totalPrice}</span>
+		// 				</div>
+		// 			</div>
+		// 			<button
+		// 				className="Cart__checkout button"
+		// 				onClick={(e) => openCheckout(e)}
+		// 			>
+		// 				CHECKOUT
+		// 			</button>
+		// 		</footer>
+		// 	</div>
+		// </div>
 	)
 }
