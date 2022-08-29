@@ -13,7 +13,10 @@ const Home = () => {
         <div style={{ backgroundImage: `url(${Background})`, height: "100vh", width: "100%", backgroundColor: "green" }} 
             className='home-container'
         >
-            <Cart />
+            <div style={{ width: "100vw", background: "red", position: "fixed", zIndex: "9999"}}>
+                <Cart />
+                Hello
+            </div>
             <Nav /> 
 			<Product /> 
         </div>
