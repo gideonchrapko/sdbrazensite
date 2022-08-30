@@ -4,7 +4,7 @@ import { useShopify } from './hooks';
 
 import Home from './Components/Home'
 import Landing from './Components/Landing'
-import Cart from './Components_shopify/Cart'
+import ReturnPolicy from './Components/ReturnPolicy'
 // import Products from './Components_shopify/Products'
 
 import './App.css';
@@ -30,6 +30,7 @@ function App() {
 			<Routes>
 				<Route exacta path='/' element={<Landing />} />
 				<Route path="/home" element={<Home />} />
+				<Route path="return-policy" element={<ReturnPolicy />} />
 			</Routes>
 		</div>
   );
