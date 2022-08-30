@@ -1,0 +1,6 @@
+.return-header {
+    font-family: fake_receiptregular;
+    font-weight: 100;
+    color: black;
+    font-size: clamp(30pt, 5vw, 50pt)
+}
