@@ -14,6 +14,7 @@ export default () => {
 
 	const id = "id"
 	const prodLength = products && products.length
+	const mobileView = window.innerWidth > 600
 	// const [singlePost, setSinglePost] = useState();
 
 	useEffect(() => {
@@ -47,14 +48,14 @@ export default () => {
 								key={product.id + i} style={{ marginTop: "20vh" }}
 							>
 								{/* image side */}
-								<div style={{ float: "left", width: `${window.innerWidth > 600 ? "60%" : "100%"}` }}> 
+								<div style={{ transform: mobileView ? 'scale(1)' : 'scale(1.15)', float: "left", width: `${mobileView ? "60%" : "100%"}` }}> 
 									{image ? (
 										<img  src={image.src} alt={`${product.title}`} />
 									) : null}
 								</div>
 
 								{/* info side */}
-								<div style={{ float: "right", width: `${window.innerWidth > 600 ? "40%" : "100%"}` }}>
+								<div style={{ float: "right", width: `${mobileView ? "40%" : "100%"}` }}>
 									{/* title */}
 									<div>
 										{imageTitle ? (
