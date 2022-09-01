@@ -20,8 +20,6 @@ export default function Example() {
       style={{
         marginTop: mobView ? "20vh" : "5vh",
         height: mobView ? '60vh' : "90vh",
-        // width: '80vw',
-        // left: '20vw',
         cursor: 'pointer',
         filter: `${ hovered ? `invert(21%) sepia(88%) saturate(3469%) hue-rotate(305deg) brightness(97%) contrast(118%)` : ``}`,
         display: 'inline-block',

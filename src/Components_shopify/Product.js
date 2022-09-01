@@ -44,7 +44,7 @@ export default () => {
 						const description = product.description && product.description.split(".")
 						return (
 							<Col lg={{ span: prodLength === 1 ? 8 : 5, offset: prodLength === 1 ? 2 : `${i % 2 === 0 ? 1 : 0}` }} xs={{ span: 8, offset: 2 }} 
-								key={product.id + i} style={{ marginTop: `${window.innerWidth > 600 ? "15vh" : "23vh"}`}}
+								key={product.id + i} style={{ marginTop: "15vh" }}
 							>
 								{/* image side */}
 								<div style={{ float: "left", width: `${window.innerWidth > 600 ? "60%" : "100%"}` }}> 
