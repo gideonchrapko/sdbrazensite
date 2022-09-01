@@ -12,8 +12,14 @@ import Background from '../Assets/SDpixelpng.png'
 
 const Home = () => {
     return (
-        <Container fluid style={{ backgroundImage: `url(${Background})`, height: "100vh", width: "100%" }} className='home-container' >
-            <Cart />
+        <Container 
+            fluid 
+            style={{ 
+                backgroundImage: `url(${Background})`
+            }} 
+            className='home-container'
+        >
+            {/* <Cart /> */}
             <Nav /> 
 			<Product /> 
             <Footer />

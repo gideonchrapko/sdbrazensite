@@ -40,8 +40,6 @@ export default (props) => {
 		.catch(console.error)
 	  },[])
 
-	  console.log(checkoutState)
-
 	return (
 		<li className="Line-item">
 			{checkoutState.lineItems &&
@@ -62,9 +60,6 @@ export default (props) => {
 										{lineItem.variant.title}
 									</div>
 									<div>
-										{lineItem.variant.title 
-
-										}
 										{singlePost && singlePost[i] ?
 											<img src={singlePost && singlePost[i].mainImage.asset.url} style={{ height: "3vw", minHeight: "30pt" }} />
 											:

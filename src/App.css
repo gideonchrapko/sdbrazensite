@@ -67,11 +67,6 @@
  }
  
  .Product-wrapper {
-   /* max-width: 900px;
-   margin: 40px auto 0;
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center; */
    background: red;
  }
  
@@ -82,11 +77,10 @@
  .App__view-cart-wrapper2 {
 	position: absolute;
 	top: 10px;
-	left: -65px;
+	margin-left: -60px;
  }
  
  .App__view-cart {
-  font-size: 45px;
 	border: none;
 	background: none;
 	cursor: pointer;
@@ -438,8 +432,9 @@
 
  .Prod-price-font {
   font-family: fake_receiptregular;
-  font-size: 30pt;
+  font-size: 20pt;
   margin-left: 20px;
+  font-weight: 100;
  }
 
  .Prod-cart {

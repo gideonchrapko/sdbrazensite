@@ -1,68 +1,41 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import { useShopify } from "../hooks";
-import sanityClient from '../client';
+// import sanityClient from '../client';
 
 import SizeVariant from "./SizeVariants";
 
 export default () => {
 	const {
 		products,
-		// product,
 		fetchProduct,
-		// openCart,
-		// checkoutState,
-		// addVariant,
 	} = useShopify()
 
 	const id = "id"
 	const prodLength = products && products.length
-	// const [size, setSize] = useState("");
-	// const [click, setClicked] = useState();
-	const [singlePost, setSinglePost] = useState();
-	// const [quantity, setQuantity] = useState(1);
-	// const [item, setItem] = useState()
-	// const [available, setAvailable] = useState(true);
-	// const [prodIndex, setProdIndex] = useState(0);
-
-	// function changeSize(sizeId, quantity) {
-	// 	openCart()
-	// 	if (sizeId === "") {
-	// 		sizeId = products[prodIndex].variants[0].id
-	// 		const lineItemsToAdd = [
-	// 			{ variantId: sizeId, quantity: parseInt(quantity, 10) },
-	// 		]
-	// 		const checkoutId = checkoutState.id
-	// 		addVariant(checkoutId, lineItemsToAdd)
-	// 	} else {
-	// 		const lineItemsToAdd = [
-	// 			{ variantId: sizeId, quantity: parseInt(quantity, 10) },
-	// 		]
-	// 		const checkoutId = checkoutState.id
-	// 		addVariant(checkoutId, lineItemsToAdd)
-	// 	}
-	// }
+	// const [singlePost, setSinglePost] = useState();
 
 	useEffect(() => {
 		fetchProduct(id)
 	}, [id])
 
-	useEffect(() => {
-		sanityClient.fetch(`*[_type == "productImages"]{
-			mainImage{
-			asset->{
-			  _id,
-			  url
-			},
-			alt
-		  },
-		 }`)
-		.then((data) => setSinglePost(data))
-		.catch(console.error)
-	  },[])
+	// useEffect(() => {
+	// 	sanityClient.fetch(`*[_type == "productImages"]{
+	// 		mainImage{
+	// 		asset->{
+	// 		  _id,
+	// 		  url
+	// 		},
+	// 		alt
+	// 	  },
+	// 	 }`)
+	// 	.then((data) => setSinglePost(data))
+	// 	.catch(console.error)
+	//   },[])
 
 	return (
-		<Container fluid style={{ position: "relative", zIndex: "10" }}>
+		<Container fluid style={{ zIndex: "10", overflowY: "scroll" }}>
 			<Row>
 				{products &&
 					products.map((product, i) => {
@@ -70,7 +43,7 @@ export default () => {
 						const imageTitle = product.images[1]
 						const description = product.description && product.description.split(".")
 						return (
-							<Col lg={{ span: prodLength === 1 ? 8 : 5, offset: prodLength === 1 ? 2 : `${i % 2 === 0 ? 1 : 0}` }} xs={{ span: 10, offset: 1 }} 
+							<Col lg={{ span: prodLength === 1 ? 8 : 5, offset: prodLength === 1 ? 2 : `${i % 2 === 0 ? 1 : 0}` }} xs={{ span: 8, offset: 2 }} 
 								key={product.id + i} style={{ marginTop: `${window.innerWidth > 600 ? "15vh" : "23vh"}`}}
 							>
 								{/* image side */}
@@ -79,6 +52,7 @@ export default () => {
 										<img  src={image.src} alt={`${product.title}`} />
 									) : null}
 								</div>
+
 								{/* info side */}
 								<div style={{ float: "right", width: `${window.innerWidth > 600 ? "40%" : "100%"}` }}>
 									{/* title */}
@@ -90,12 +64,10 @@ export default () => {
 									<div>
 										<h3 className="Prod-price-font">${product.variants[0].price}</h3>
 									</div>
-
 									<SizeVariant 
 										product={product} 
 										description={description}
 										i={i}
-
 									/>
 									{/* <div style={{ display: "flex", width: "100%", textAlign: 'center' }} >
 										{product.variants
