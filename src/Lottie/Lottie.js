@@ -7,6 +7,7 @@ import LottieAnim from '../Assets/stardogpng.json'
 export default function Example() {
     const [hovered, setHovered] = useState(false)
     let navigate = useNavigate();
+    const mobView = window.innerWidth < 600
 
   return (
     <Lottie
@@ -17,8 +18,10 @@ export default function Example() {
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
       style={{
-        marginTop: "20vh",
-        height: '60vh',
+        marginTop: mobView ? "20vh" : "5vh",
+        height: mobView ? '60vh' : "90vh",
+        // width: '80vw',
+        // left: '20vw',
         cursor: 'pointer',
         filter: `${ hovered ? `invert(21%) sepia(88%) saturate(3469%) hue-rotate(305deg) brightness(97%) contrast(118%)` : ``}`,
         display: 'inline-block',
