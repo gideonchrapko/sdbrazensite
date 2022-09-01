@@ -13,16 +13,20 @@ const Nav = () => {
                 <div onClick={() => setHover(!hover)} >
                     <div style={{ opacity: `${hover ? "1" : "1" }` }} className='nav-div'>
                         <img src={Info} className={hover ? "info-hovered" : "info-nav"} />
-                        <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}>CONTACT</h1>
-                        <Link to="/home"><h1 className='nav-text' style={{ textDecoration: 'underline', opacity: `${hover ? "1" : "0"}`, color: "black" }}>STORE</h1></Link>
+                        <div style={{ marginTop: "20px" }}>
+                            <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}>CONTACT</h1>
+                            <Link to="/home"><h1 className='nav-text' style={{ opacity: `${hover ? "1" : "0"}`, color: "black" }}>STORE</h1></Link>
+                        </div>
                     </div>
                 </div>
                 :
                 <div onPointerOver={() => setHover(true)} onPointerOut={() => setHover(false)}>
                     <div style={{ opacity: `${hover ? "1" : "1" }` }} className='nav-div'>
                         <img src={Info} className={hover ? "info-hovered" : "info-nav"} />
-                        <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}>CONTACT</h1>
-                        <Link to="/home"><h1 className='nav-text' style={{ textDecoration: 'underline', opacity: `${hover ? "1" : "0"}`, color: "black" }}>STORE</h1></Link>
+                        <div style={{ marginTop: "20px" }}>
+                            <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}>CONTACT</h1>
+                            <Link to="/home"><h1 className='nav-text' style={{ opacity: `${hover ? "1" : "0"}`, color: "black" }}>STORE</h1></Link>
+                        </div>
                     </div>
                 </div>            
             }

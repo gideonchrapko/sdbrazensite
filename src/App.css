@@ -94,24 +94,25 @@
 }
  
  .button {
-   background-color: black;
-   color: white;
-   font-weight: 800;
-   border: none;
-   font-size: clamp(30pt, 6vw, 40pt);
-   border-radius: 10pt;
-   padding: 0px 17px;
-   cursor: pointer;
+    background-color: white;
+    color:rgb(235, 53, 173);
+    font-weight: 800;
+    border: none;
+    font-family: fake_receiptregular;
+    font-size: clamp(20pt, 4vw, 30pt);
+    border-radius: 10pt;
+    padding: 0px 17px;
+    cursor: pointer;
  }
  
  .button:hover,
  .button:focus {
    /* background-color: #222222; */
-   color:rgb(235, 53, 173);
+   color: black;
  }
  
  .button:disabled {
-   background: #bfbfbf;
+   /* background: #bfbfbf; */
    cursor: not-allowed;
  }
  
@@ -234,7 +235,7 @@
    display: block;
    width: 100%;
    font-weight: 700;
-   font-size: clamp(30pt, 5vw, 35pt);
+   /* font-size: clamp(30pt, 5vw, 35pt); */
  }
  
  .Cart-info {
@@ -424,7 +425,7 @@
  }
 
  .Prod-font-size {
-  font-size: clamp(12pt, 3vw, 30pt);
+  font-size: 30pt;
   font-family: fake_receiptregular;
  }
 
@@ -432,14 +433,20 @@
   list-style-type: none;
   margin-left: -20px;
   font-family: fake_receiptregular;
-  font-size: clamp(7pt, 2vw, 8pt);
+  font-size: 8pt;
+ }
+
+ .Prod-price-font {
+  font-family: fake_receiptregular;
+  font-size: 30pt;
+  margin-left: 20px;
  }
 
  .Prod-cart {
-  font-size: clamp(10pt, 3vw, 17pt);
+  font-size: 17pt;
   font-family: 'Helvetica Neue', sans-serif;
   font-weight: 800;
-  margin-left: 20pt;
+  margin-left: 20px;
   text-decoration: underline;
  }
 
