@@ -18,7 +18,7 @@ const Nav = () => {
                         <div style={{ opacity: `${hover ? "1" : "1" }`, backgroundColor: hover ? "rgba(255,255,255,0.9)" : "" }} className='nav-div'>
                             <img src={Info} className={hover ? "info-hovered" : "info-nav"} />
                             <div style={{ marginTop: "20px" }}>
-                                <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}>CONTACT</h1>
+                                <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}><a href="mailto:info@stardog.store" style={{ color: "black" }}>CONTACT</a></h1>
                                 <Link to="/home"><h1 className='nav-text' style={{ opacity: `${hover ? "1" : "0"}`, color: "black" }}>STORE</h1></Link>
                             </div>
                         </div>
@@ -28,7 +28,7 @@ const Nav = () => {
                         <div style={{ opacity: `${hover ? "1" : "1" }`, backgroundColor: hover ? "rgba(255,255,255,0.9)" : "" }} className='nav-div'>
                             <img src={Info} className={hover ? "info-hovered" : "info-nav"} />
                             <div style={{ marginTop: "20px" }}>
-                                <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}>CONTACT</h1>
+                                <h1 className='nav-text' style={{ marginTop: "5px", opacity: `${hover ? "1" : "0"}` }}><a href="mailto:info@stardog.store" style={{ color: "black" }}>CONTACT</a></h1>
                                 <Link to="/home"><h1 className='nav-text' style={{ opacity: `${hover ? "1" : "0"}`, color: "black" }}>STORE</h1></Link>
                             </div>
                         </div>
