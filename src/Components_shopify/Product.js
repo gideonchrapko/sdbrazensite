@@ -36,8 +36,8 @@ export default () => {
 	//   },[])
 
 	return (
-		<Container fluid style={{ zIndex: "10", overflowY: "scroll" }}>
-			<Row>
+		<Container fluid style={{ zIndex: "10", overflow: "hidden", height: "100%" }}>
+			<Row style={{ overflowY: "hidden", height: "100%" }}>
 				{products &&
 					products.map((product, i) => {
 						const image = product.images[0]
