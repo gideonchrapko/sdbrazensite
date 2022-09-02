@@ -60,11 +60,12 @@ export default (props) => {
 										{lineItem.variant.title}
 									</div>
 									<div>
-										{singlePost && singlePost[i] ?
+										{/* {singlePost && singlePost[i] ?
 											<img src={singlePost && singlePost[i].mainImage.asset.url} style={{ height: "3vw", minHeight: "30pt" }} />
 											:
 											<h1 className="Line-item__title">{lineItem.title}</h1>
-										}
+										} */}
+										<h1 className="Line-item__title">{lineItem.title}</h1>
 									</div>
 								</div>
 								<div className="Line-item__content-row">
