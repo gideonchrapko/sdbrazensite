@@ -89,7 +89,7 @@ const SizeVariant = (props) => {
 						}} 
 						className='Prod-cart'
 					>
-						PICK ANOTHER SIZE
+						OUT OF STOCK
 					</h3>
 				}
 			</div>
