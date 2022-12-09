@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useShopify } from "../hooks";
 
 const SizeVariant = (props) => {
@@ -13,8 +13,11 @@ const SizeVariant = (props) => {
 	const [click, setClicked] = useState();
     const [size, setSize] = useState("");
     const [available, setAvailable] = useState(true);
+	const [sizeSelected, setSizeSelected] = useState(false)
     const [quantity, setQuantity] = useState(1);
 	const [prodIndex, setProdIndex] = useState(0);
+
+	//only on page load
 
     function changeSize(sizeId, quantity) {
 		openCart()
@@ -47,6 +50,7 @@ const SizeVariant = (props) => {
                                     setSize(variant.id.toString())
                                     setClicked(item)
                                     setAvailable(variant.available)
+									setSizeSelected(true)
                                 }}
                                 className='Prod-font-size'
                                 style={{ 
@@ -70,8 +74,8 @@ const SizeVariant = (props) => {
                 </ul>
             </div>
             <div>
-				{product.variants[0].available && available ?
-					<h3 
+				{sizeSelected && available ?
+					<h3
 						style={{ cursor: "pointer" }} 
 						onClick={(e) => {
 							changeSize(size, quantity)
@@ -89,7 +93,7 @@ const SizeVariant = (props) => {
 						}} 
 						className='Prod-cart'
 					>
-						OUT OF STOCK
+						{sizeSelected ? "OUT OF STOCK" : "PICK A SIZE"}
 					</h3>
 				}
 			</div>
