@@ -569,4 +569,5 @@ h2 {
 
 .but:hover {
   color: red;
+  text-decoration: none;
 }

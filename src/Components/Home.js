@@ -1,48 +1,27 @@
-// import React from 'react'
-// import Nav from './Nav'
-// import Product from '../Components_shopify/Product'
-// import Footer from '../Components/Footer'
-
-// import { Container } from 'react-bootstrap'
-
-// import '../Styles/Home.css'
-
-// import Background from '../Assets/SDpixelpng.png'
-
-// const Home = () => {
-//     return (
-//         <Container
-//             fluid
-//             style={{
-//                 backgroundImage: `url(${Background})`
-//             }}
-//             className='home-container'
-//         >
-//             <Nav />
-// 			<Product />
-//             <Footer />
-//         </Container>
-//     )
-// }
-
-// export default Home
-
 import React from 'react'
-// import Nav from './Nav'
-// import Cart from '../Components_shopify/Cart'
-// import Product from '../Components_shopify/Product'
-import { useNavigate } from 'react-router-dom'
-// import Footer from '../Components/Footer'
-
-// import { Container } from 'react-bootstrap'
+import { useScramble } from 'use-scramble'
 
 import '../Styles/Home.css'
 
 import bgImage from '../Assets/XGRAPHIC.png'
 // import Background from '../Assets/SDpixelpng.png'
+const Scramble = ({ text, link, name }) => {
+  const { ref, replay } = useScramble({
+    text: text,
+    speed: 0.6,
+    tick: 1,
+    step: 1,
+    scramble: 4,
+    seed: 0,
+  })
+  return (
+    <a href={link} className={name} ref={ref} onPointerOver={replay}>
+      1
+    </a>
+  )
+}
 
 const Home = () => {
-  const navigate = useNavigate()
   return (
     <div
       style={{
@@ -68,21 +47,16 @@ const Home = () => {
         }}
         alt="background"
       />
-      <a
-        href="https://www.youtube.com/"
-        className="button-left but"
-        onClick={() => navigate('/home')}
-      >
-        download
-      </a>
-      <a
-        href="https://www.youtube.com/"
-        className="button-right but"
-        onClick={() => navigate('/home')}
-      >
-        Stream
-      </a>
-      {/* <Footer /> */}
+      <Scramble
+        text="Stream"
+        link="https://www.youtube.com/"
+        name="button-right but"
+      />
+      <Scramble
+        text="Download"
+        link="https://www.youtube.com/"
+        name="button-left but"
+      />
     </div>
   )
 }
