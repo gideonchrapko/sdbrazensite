@@ -49,12 +49,12 @@ const Home = () => {
       />
       <Scramble
         text="Stream"
-        link="https://www.youtube.com/"
+        link="https://soundcloud.com/loukeman/sdx-megamix?si=0f32721e3eb64643b4b934bf624e7074&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
         name="button-right but"
       />
       <Scramble
         text="Download"
-        link="https://www.youtube.com/"
+        link="https://loukeman.bandcamp.com/track/sdx-megamix"
         name="button-left but"
       />
     </div>
