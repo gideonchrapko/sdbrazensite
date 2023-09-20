@@ -490,13 +490,13 @@ h2 {
 @media only screen and (max-width: 600px) {
   .button-left {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     left: 15%;
   }
 
   .button-right {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     right: 15%;
   }
 }
@@ -504,13 +504,13 @@ h2 {
 @media only screen and (min-width: 601px) and (max-width: 768px) {
   .button-left {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     left: 20%;
   }
 
   .button-right {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     right: 20%;
   }
 }
@@ -518,13 +518,13 @@ h2 {
 @media only screen and (min-width: 769px) and (max-width: 992px) {
   .button-left {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     left: 28%;
   }
 
   .button-right {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     right: 28%;
   }
 }
@@ -532,13 +532,13 @@ h2 {
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   .button-left {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     left: 33%;
   }
 
   .button-right {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     right: 33%;
   }
 }
@@ -546,13 +546,13 @@ h2 {
 @media only screen and (min-width: 1200px) {
   .button-left {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     left: 36%;
   }
 
   .button-right {
     position: fixed;
-    top: 48%;
+    top: 48vh;
     right: 36%;
   }
 }
@@ -564,6 +564,7 @@ h2 {
   font-size: large;
   font-family: lucon;
   font-weight: 800;
+  color: black;
 }
 
 .but:hover {

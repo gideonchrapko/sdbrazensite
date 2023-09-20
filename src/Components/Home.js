@@ -28,11 +28,11 @@
 // export default Home
 
 import React from 'react'
-import Nav from './Nav'
+// import Nav from './Nav'
 // import Cart from '../Components_shopify/Cart'
-import Product from '../Components_shopify/Product'
+// import Product from '../Components_shopify/Product'
 import { useNavigate } from 'react-router-dom'
-import Footer from '../Components/Footer'
+// import Footer from '../Components/Footer'
 
 // import { Container } from 'react-bootstrap'
 
@@ -51,6 +51,10 @@ const Home = () => {
         verticalAlign: 'middle',
         positioon: 'relative',
         display: 'flex',
+        position: 'fixed',
+        minHeight: '100vh',
+        /* mobile viewport bug fix */
+        minHeight: '-webkit-fill-available',
       }}
     >
       <img
@@ -64,12 +68,20 @@ const Home = () => {
         }}
         alt="background"
       />
-      <button className="button-left but" onClick={() => navigate('/home')}>
+      <a
+        href="https://www.youtube.com/"
+        className="button-left but"
+        onClick={() => navigate('/home')}
+      >
         download
-      </button>
-      <button className="button-right but" onClick={() => navigate('/home')}>
+      </a>
+      <a
+        href="https://www.youtube.com/"
+        className="button-right but"
+        onClick={() => navigate('/home')}
+      >
         Stream
-      </button>
+      </a>
       {/* <Footer /> */}
     </div>
   )
