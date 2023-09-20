@@ -35,7 +35,7 @@ export default () => {
 								{/* image side */}
 								<div style={{ transform: mobileView ? 'scale(1)' : 'scale(1.15)', float: "left", width: `${mobileView ? "60%" : "100%"}` }}> 
 									{image ? (
-										<img  src={image.src} alt={`${product.title}`} />
+										<img  src={image.url} alt={`${product.title}`} />
 									) : null}
 								</div>
 								{/* info side */}
@@ -43,7 +43,7 @@ export default () => {
 									{/* title */}
 									<div>
 										{imageTitle ? (
-											<img  src={imageTitle.src} alt={`${product.title}`} style={{ width: "100%" }} />
+											<img  src={imageTitle.url} alt={`${product.title}`} style={{ width: "100%" }} />
 										) : <h1 style={{ fontSize: "clamp(30pt, 3vw, 80pt)" }}>{product.title}</h1>}
 									</div>
 									<div>
