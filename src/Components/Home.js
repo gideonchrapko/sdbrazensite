@@ -32,7 +32,6 @@ const Home = () => {
         display: 'flex',
         position: 'fixed',
         minHeight: '100vh',
-        /* mobile viewport bug fix */
         minHeight: '-webkit-fill-available',
       }}
     >
