@@ -1,19 +1,19 @@
 /* INITIALIZERS + DEFAULTS
  * ============================== */
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
 
 @font-face {
-  font-family: 'fake_receiptregular';
-  src: url('./Styles/fake_receipt-webfont.woff2') format('woff2'),
-    url('./Styles/fake_receipt-webfont.woff') format('woff');
+  font-family: "fake_receiptregular";
+  src: url("./Styles/fake_receipt-webfont.woff2") format("woff2"),
+    url("./Styles/fake_receipt-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'lucon';
-  src: url('./Styles/lucon-webfont.woff2') format('woff2'),
-    url('./Styles/lucon-webfont.woff') format('woff');
+  font-family: "lucon";
+  src: url("./Styles/lucon-webfont.woff2") format("woff2"),
+    url("./Styles/lucon-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -435,7 +435,7 @@ h2 {
 
 .Prod-cart {
   font-size: 17pt;
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   font-weight: 800;
   margin-left: 20px;
   text-decoration: underline;
@@ -489,13 +489,13 @@ h2 {
 
 @media only screen and (max-width: 600px) {
   .button-left {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     left: 13%;
   }
 
   .button-right {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     right: 15%;
   }
@@ -503,13 +503,13 @@ h2 {
 
 @media only screen and (min-width: 601px) and (max-width: 768px) {
   .button-left {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     left: 18%;
   }
 
   .button-right {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     right: 20%;
   }
@@ -517,13 +517,13 @@ h2 {
 
 @media only screen and (min-width: 769px) and (max-width: 992px) {
   .button-left {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     left: 27%;
   }
 
   .button-right {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     right: 28%;
   }
@@ -531,13 +531,13 @@ h2 {
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   .button-left {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     left: 33%;
   }
 
   .button-right {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     right: 33%;
   }
@@ -545,13 +545,13 @@ h2 {
 
 @media only screen and (min-width: 1200px) {
   .button-left {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     left: 36%;
   }
 
   .button-right {
-    position: fixed;
+    position: absolute;
     top: 48vh;
     right: 36%;
   }
@@ -570,4 +570,49 @@ h2 {
 .but:hover {
   color: red;
   text-decoration: none;
+}
+
+.centered-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 24px; /* Adjust the font size as needed */
+}
+
+.text-modal {
+  font-family: lucon;
+  font-size: 15pt;
+  padding-left: 40px;
+  line-height: 1;
+}
+
+.button-modal {
+  background: none;
+  border: none;
+  font-size: 13pt;
+}
+
+.font-subscribe {
+  font-family: lucon;
+  font-size: 10pt;
+}
+
+@media only screen and (max-width: 768px) {
+  .model-size {
+    height: 70vh;
+    width: 90vw;
+    top: 15vh;
+    left: 5vw;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .model-size {
+    height: 70vh;
+    width: 60vw;
+    top: 15vh;
+    left: 20vw;
+  }
 }
