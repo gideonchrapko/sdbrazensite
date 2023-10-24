@@ -16,7 +16,12 @@ const Modal = ({ modalClose }) => {
       <button
         onClick={modalClose}
         className="button-modal"
-        style={{ position: "absolute", top: "10px", right: "10px" }}
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          color: "black",
+        }}
       >
         x
       </button>

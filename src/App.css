@@ -18,6 +18,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "antonregular";
+  src: url("../src/fonts/anton-regular.woff2") format("woff2"),
+    url("../src/fonts/anton-regular.woff2") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 *,
 *:before,
 *:after {
@@ -592,6 +600,7 @@ h2 {
   background: none;
   border: none;
   font-size: 13pt;
+  color: black;
 }
 
 .font-subscribe {
@@ -616,4 +625,8 @@ h2 {
     top: 15vh;
     left: 20vw;
   }
+}
+
+.tickets-font {
+  font-family: antonregular;
 }

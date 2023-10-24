@@ -68,6 +68,7 @@ const Home = () => {
                 transform: "rotate(-20deg)",
                 fontSize: "18vw",
               }}
+              className="tickets-font"
             >
               TICKETS
             </h1>
