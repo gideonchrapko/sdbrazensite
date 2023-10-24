@@ -37,36 +37,32 @@ const Home = () => {
         }}
       >
         <img
+          className="transform-mobile"
           src={Poster}
           style={{
             objectFit: "contain",
             display: "inline-block",
             marginLeft: "auto",
             marginRight: "auto",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
             position: "absolute",
             width: "100%",
             cursor: "pointer",
           }}
           alt="background"
         />
-        <div className="centered-text">
+        <div className="centered-text transform-mobile">
           <a
             href="https://ra.co/events/1794868"
             style={{
               zIndex: "10",
               color: "red",
               fontFamily: "impact",
-              // textDecoration: "none",
               fontSize: "18vw",
             }}
           >
             <h1
               style={{
                 transform: "rotate(-20deg)",
-                fontSize: "18vw",
               }}
               className="tickets-font"
             >

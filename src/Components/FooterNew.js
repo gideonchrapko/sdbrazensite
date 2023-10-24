@@ -38,7 +38,9 @@ const Modal = ({ modalClose }) => {
       </p>
       <p className="text-modal">info@sdmusicgroup.com</p>
       <MailchimpForm />
-      <p className="text-modal">Discord: https://discord.gg/tQVkEHtP</p>
+      <a href="https://discord.gg/tQVkEHtP" className="text-modal">
+        Discord: https://discord.gg/tQVkEHtP
+      </a>
     </div>
   )
 }
