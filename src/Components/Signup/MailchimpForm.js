@@ -31,7 +31,9 @@ const CustomForm = ({ status, message, onValidated }) => {
       onSubmit={(e) => handleSubmit(e)}
       style={{ paddingLeft: "30px", paddingBottom: "5px" }}
     >
-      {status === "sending" && <div>sending...</div>}
+      {status === "sending" && (
+        <div style={{ paddingRight: "5px" }}>sending...</div>
+      )}
       {status === "error" && (
         <div
           dangerouslySetInnerHTML={{ __html: message }}
@@ -72,8 +74,6 @@ const CustomForm = ({ status, message, onValidated }) => {
 
 const MailchimpForm = (props) => {
   const url = `https://sdmusicgroup.us21.list-manage.com/subscribe/post?u=${process.env.REACT_APP_MAILCHIMP_U}&id=${process.env.REACT_APP_MAILCHIMP_ID}`
-  // const url = `https://siberiahills.us21.list-manage.com/subscribe/post?u=223ffd41ccda8812a7ff21bf7;id=61e0b83ece;`
-  // https://siberiahills.us21.list-manage.com/subscribe/post?u=334f5088645f23797f4c3ecea&amp;id=cef89e94d4&amp;
 
   return (
     <div className="formDiv">
