@@ -1,13 +1,5 @@
 {
   "projects": {
     "default": "sdmusicgroup-1759f"
-  },
-  "hosting": {
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
   }
 }
