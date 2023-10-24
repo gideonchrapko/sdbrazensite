@@ -2,7 +2,7 @@ import React from "react"
 import { useScramble } from "use-scramble"
 
 import bgImage from "../Assets/XGRAPHIC.png"
-import Poster from "../Assets/Poster.png"
+import Poster from "../Assets/Poster1.png"
 import Footer from "../Components/FooterNew"
 
 const Scramble = ({ text, link, name }) => {
