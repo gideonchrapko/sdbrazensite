@@ -13,7 +13,7 @@ const CustomForm = ({ status, message, onValidated }) => {
     email &&
       email.indexOf("@") > -1 &&
       onValidated({
-        MERGE0: email,
+        EMAIL: email,
       })
   }
 
@@ -71,7 +71,9 @@ const CustomForm = ({ status, message, onValidated }) => {
 }
 
 const MailchimpForm = (props) => {
-  const url = `https://westcoastcustoms.us19.list-manage.com/subscribe/post?u=${process.env.REACT_APP_MAILCHIMP_U}&id=${process.env.REACT_APP_MAILCHIMP_ID}`
+  const url = `https://sdmusicgroup.us21.list-manage.com/subscribe/post?u=${process.env.REACT_APP_MAILCHIMP_U}&id=${process.env.REACT_APP_MAILCHIMP_ID}`
+  // const url = `https://siberiahills.us21.list-manage.com/subscribe/post?u=223ffd41ccda8812a7ff21bf7;id=61e0b83ece;`
+  // https://siberiahills.us21.list-manage.com/subscribe/post?u=334f5088645f23797f4c3ecea&amp;id=cef89e94d4&amp;
 
   return (
     <div className="formDiv">
