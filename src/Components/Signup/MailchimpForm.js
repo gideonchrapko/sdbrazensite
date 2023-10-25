@@ -27,10 +27,7 @@ const CustomForm = ({ status, message, onValidated }) => {
   }
 
   return (
-    <form
-      onSubmit={(e) => handleSubmit(e)}
-      style={{ paddingLeft: "30px", paddingBottom: "5px" }}
-    >
+    <form onSubmit={(e) => handleSubmit(e)} style={{ paddingBottom: "5px" }}>
       {status === "sending" && (
         <div style={{ paddingRight: "5px" }}>sending...</div>
       )}
@@ -46,12 +43,9 @@ const CustomForm = ({ status, message, onValidated }) => {
           style={{ paddingRight: "5px" }}
         />
       )}
-      <div style={{ display: "flex", paddingLeft: "10px" }}>
+      <div style={{ display: "flex" }}>
         {status !== "success" ? (
-          <div
-            className="inputTextStyling font-subscribe"
-            style={{ paddingRight: "5px" }}
-          >
+          <div className="inputTextStyling font-subscribe">
             <InputField
               //   label="Email"
               onChangeHandler={setEmail}

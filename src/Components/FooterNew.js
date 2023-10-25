@@ -10,6 +10,7 @@ const Modal = ({ modalClose }) => {
         position: "fixed",
         border: "1px solid black",
         background: "white",
+        padding: "25px",
       }}
       className="model-size"
     >

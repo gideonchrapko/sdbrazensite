@@ -589,7 +589,8 @@ h2 {
 .text-modal {
   font-family: lucon;
   font-size: 15pt;
-  padding-left: 40px;
+  /* padding-left: 40px; */
+  /* padding-right: 40px; */
   line-height: 1;
   color: black;
 }
@@ -623,7 +624,7 @@ h2 {
   .transform-mobile {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -60%);
+    transform: translate(-50%, -56%);
   }
 }
 
