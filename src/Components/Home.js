@@ -3,7 +3,12 @@ import { useScramble } from "use-scramble"
 
 import bgImage from "../Assets/XGRAPHIC.png"
 import Poster from "../Assets/Poster1.png"
-import Footer from "../Components/FooterNew"
+import Footer from "./HeaderNew"
+import Flyer from "../Assets/flyer.JPG"
+import Product from "../Components_shopify/Product"
+import { Container } from "react-bootstrap"
+import Background from "../Assets/SDpixelpng.png"
+import "../Styles/Home.css"
 
 const Scramble = ({ text, link, name }) => {
   const { ref, replay } = useScramble({
@@ -24,30 +29,10 @@ const Scramble = ({ text, link, name }) => {
 const Home = () => {
   return (
     <div style={{ overflow: "scroll" }}>
-      <div
-        style={{
-          width: "100vw",
-          height: "100vh",
-          verticalAlign: "middle",
-          positioon: "relative",
-          display: "flex",
-          position: "relative",
-          minHeight: "100vh",
-          minHeight: "-webkit-fill-available",
-        }}
-      >
+      {/* <div className="div-home">
         <img
-          className="transform-mobile"
+          className="transform-mobile padding center-image"
           src={Poster}
-          style={{
-            objectFit: "contain",
-            display: "inline-block",
-            marginLeft: "auto",
-            marginRight: "auto",
-            position: "absolute",
-            width: "100%",
-            cursor: "pointer",
-          }}
           alt="background"
         />
         <div className="centered-text transform-mobile">
@@ -70,18 +55,17 @@ const Home = () => {
             </h1>
           </a>
         </div>
-      </div>
-      <div
-        style={{
-          width: "100vw",
-          height: "100vh",
-          verticalAlign: "middle",
-          position: "relative",
-          display: "flex",
-          minHeight: "100vh",
-          minHeight: "-webkit-fill-available",
-        }}
-      >
+      </div> */}
+      {/* <a href="https://ffm.to/lmtbh">
+        <div className="div-home">
+          <img
+            className="transform-mobile padding center-image"
+            src={Flyer}
+            alt="background"
+          />
+        </div>
+      </a> */}
+      {/* <div className="div-home">
         <img
           src={bgImage}
           style={{
@@ -107,6 +91,14 @@ const Home = () => {
           link="https://loukeman.bandcamp.com/track/sdx-megamix"
           name="button-left but"
         />
+      </div> */}
+      <div>
+        {/* <img
+          className="transform-mobile padding center-image"
+          src={Background}
+          alt="background product"
+        /> */}
+        <Product />
       </div>
       <Footer />
     </div>
