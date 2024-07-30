@@ -44,11 +44,11 @@ const Modal = ({ modalClose }) => {
         <p className="text-modal">info@sdmusicgroup.com</p>
         <MailchimpForm />
         <div className="text-modal">
-          <a href="https://discord.gg/tQVkEHtP" style={{ color: "black" }}>
-            Discord: https://discord.gg/tQVkEHtP
+          <a href="https://discord.gg/sDhGYwE8Vx" style={{ color: "black" }}>
+            Discord: https://discord.gg/sDhGYwE8Vx
           </a>
         </div>
-        <p className="text-bottom-modal">
+        <p className="text-bottom-modal text-modal">
           ALL SALES FINAL PLEASE DOUBLE CHECK YOUR SIZE AND ADDRESS. Thank you
           &lt;3
         </p>

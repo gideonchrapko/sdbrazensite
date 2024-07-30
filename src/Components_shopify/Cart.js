@@ -168,6 +168,7 @@ export default function Cart() {
                   $
                   {checkoutState.subtotalPrice &&
                     checkoutState.subtotalPrice.amount}
+                  0
                 </h2>
               </div>
               <div className="text-amount-cart">
@@ -175,6 +176,7 @@ export default function Cart() {
                 <h2 className="text-amount-size" style={{ marginLeft: "auto" }}>
                   ${" "}
                   {checkoutState.subtotalPrice && checkoutState.totalTax.amount}
+                  0
                 </h2>
               </div>
               <div className="text-amount-cart">
@@ -183,6 +185,7 @@ export default function Cart() {
                   {checkoutState.totalPrice &&
                     checkoutState.totalPrice.currencyCode}
                   ${checkoutState.totalPrice && checkoutState.totalPrice.amount}
+                  0
                 </h2>
               </div>
               <div style={{ width: "100%", display: "flex" }}>
