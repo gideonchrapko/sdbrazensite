@@ -81,7 +81,7 @@ function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
       <Col
         xs={{ span: 2 }}
         style={{
-          padding: '5px',
+          paddingTop: '5px',
           textAlign: 'right',
         }}
       >

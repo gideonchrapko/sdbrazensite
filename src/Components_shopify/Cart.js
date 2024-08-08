@@ -66,7 +66,7 @@ export default function Cart() {
             </div>
             <div
               style={{
-                height: 'calc(100% - 175px)',
+                height: 'calc(100% - 130px)',
                 overflow: 'scroll',
                 borderBottom: 'solid 2px black',
               }}
