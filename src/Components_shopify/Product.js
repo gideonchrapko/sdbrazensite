@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState, useRef } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Container, Row, Col } from "react-bootstrap"
 import { useShopify } from "../hooks"
 import { useDrag } from "@use-gesture/react"
@@ -10,23 +10,15 @@ import SizeVariant from "./SizeVariants"
 
 function Product(props) {
   const { product, price, description } = props
-  // const [toggle, setToggle] = useState(false)
   const [index, setIndex] = useState(0)
   const [end, setEnd] = useState(false)
   const [ref, { width }] = useMeasure()
-  // console.log(product && product.images)
   const val = product && product.images[0]
   const countries = product && product.images
   const arr3 = countries.concat(val)
   const arr3Length = arr3.length - 1
   const i = useRef(0)
-  // const handleClick = useCallback(() => {
-  //   setToggle((prev) => !prev)
-  // }, [])
-  // const length = Array.from(Array(product.media.nodes.length).keys())
   const length = Array.from(Array(product && product.images.length).keys())
-
-  // console.log(current)
 
   const bind = useDrag(
     ({
@@ -82,8 +74,6 @@ function Product(props) {
     from: { x: 0 },
   }))
 
-  console.log(x)
-
   return (
     <Col
       lg={{
@@ -94,7 +84,7 @@ function Product(props) {
       key={product.id + i}
       style={{ marginBottom: "5vh", marginTop: "5vh" }}
     >
-      <div className="images-product-bind lg:col-span-2">
+      <div className="images-product-bind">
         {arr3?.map((images, i) => {
           return (
             <animated.img
@@ -102,45 +92,26 @@ function Product(props) {
               ref={ref}
               key={i}
               src={images.src}
-              // sizes="(min-width: 22.5em) 25vw, 50vw"
               className="img-drag"
               style={{ x }}
             />
           )
         })}
-        <div className="absolute bottom-0 w-full text-center container-dot">
+      </div>
+      <div className="container-dot-two">
+        <div className="container-dot">
           {length &&
             length.map((dot, i) => {
               return (
                 <span
-                  style={{ background: index === i ? "#999" : "black" }}
+                  style={{ background: index === i ? "black" : "#999" }}
                   key={dot}
                   className="dot"
-                  // className={`dot w-[7px] h-[7px] md:h-[8px] md:w-[8px] rounded-3xl mx-[3px] ${
-                  //   index === i ? "bg-black" : "bg-grey"
-                  // } inline-block`}
                 ></span>
               )
             })}
         </div>
       </div>
-      {/* {image ? (
-        <img
-          src={toggle ? imageTwo : image}
-          onClick={handleClick}
-          alt={`${product.title}`}
-        />
-      ) : null}
-      <div className="dot-div">
-        <span
-          className="dot"
-          style={{ background: toggle ? "#999" : "black" }}
-        ></span>
-        <span
-          className="dot"
-          style={{ background: !toggle ? "#999" : "black" }}
-        ></span>
-      </div> */}
       <div
         style={{
           width: "100%",
@@ -148,7 +119,7 @@ function Product(props) {
         }}
       >
         <h1 className="product-new-title">{product.title}</h1>
-        <h3 className="Prod-price-font">${price}</h3>
+        <h3 className="Prod-price-font">${price}0</h3>
         <SizeVariant product={product} description={description} i={i} />
       </div>
     </Col>
@@ -176,7 +147,6 @@ export default function Products() {
         {products &&
           products.map((product, i) => {
             const image = product.images[0].src
-            const imageTwo = product.images[1].src
             const price = product.variants[0].price.amount
             const description =
               product.description && product.description.split(".")
@@ -185,7 +155,6 @@ export default function Products() {
                 i={i}
                 key={i}
                 image={image}
-                imageTwo={imageTwo}
                 price={price}
                 description={description}
                 product={product}

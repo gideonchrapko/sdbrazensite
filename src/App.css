@@ -1,27 +1,27 @@
 /* INITIALIZERS + DEFAULTS
  * ============================== */
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
 
 @font-face {
-  font-family: "fake_receiptregular";
-  src: url("./Styles/fake_receipt-webfont.woff2") format("woff2"),
-    url("./Styles/fake_receipt-webfont.woff") format("woff");
+  font-family: 'fake_receiptregular';
+  src: url('./Styles/fake_receipt-webfont.woff2') format('woff2'),
+    url('./Styles/fake_receipt-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "lucon";
-  src: url("./Styles/lucon-webfont.woff2") format("woff2"),
-    url("./Styles/lucon-webfont.woff") format("woff");
+  font-family: 'lucon';
+  src: url('./Styles/lucon-webfont.woff2') format('woff2'),
+    url('./Styles/lucon-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "antonregular";
-  src: url("../src/fonts/anton-regular.woff2") format("woff2"),
-    url("../src/fonts/anton-regular.woff2") format("woff");
+  font-family: 'antonregular';
+  src: url('../src/fonts/anton-regular.woff2') format('woff2'),
+    url('../src/fonts/anton-regular.woff2') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -113,7 +113,7 @@ h2 {
 }
 
 .cart-header {
-  font-family: "dead_by_dawn_usregular";
+  font-family: 'dead_by_dawn_usregular';
   font-weight: normal;
   font-style: normal;
   color: red;
@@ -146,6 +146,7 @@ h2 {
 }
 
 .Cart__line-items {
+  list-style: none;
   flex: 1 0 auto;
   margin: 0;
   padding: 20px;
@@ -164,7 +165,7 @@ h2 {
   width: 100%;
   font-weight: 700;
 
-  font-family: "dead_by_dawn_usregular";
+  font-family: 'dead_by_dawn_usregular';
   font-weight: normal;
   color: white;
   font-size: clamp(50pt, 7vw, 100pt);
@@ -616,30 +617,13 @@ h2 {
   font-size: 24px; /* Adjust the font size as needed */
 }
 
-.text-modal {
-  font-family: lucon;
-  font-size: 15pt;
-  line-height: 1;
-  color: black;
-}
-
-.text-bottom-modal {
-  font-family: lucon;
-  font-size: 15pt;
-  line-height: 1;
-  color: black;
-  position: absolute;
-  bottom: 0;
-  max-width: 500px;
-}
-
 .button-modal {
   background: none;
   border: none;
   font-size: 13pt;
   color: black;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .font-subscribe {
@@ -667,6 +651,13 @@ h2 {
   .padding {
     padding: 0px;
   }
+  .text-modal {
+    font-family: lucon;
+    font-size: 11pt;
+    line-height: 1;
+    color: black;
+    max-width: 325px;
+  }
 }
 
 @media only screen and (min-width: 769px) {
@@ -688,6 +679,19 @@ h2 {
   .padding {
     padding: 30px;
   }
+  .text-modal {
+    font-family: lucon;
+    font-size: 15pt;
+    line-height: 1;
+    color: black;
+    max-width: 500px;
+  }
+}
+
+.text-bottom-modal {
+  color: black;
+  position: absolute;
+  bottom: 0;
 }
 
 .div-home {
@@ -724,6 +728,7 @@ h2 {
   font-family: lucon;
   font-size: 13pt;
   line-height: 0.5;
+  margin-top: 5px;
 }
 
 .Prod-price-font {
@@ -790,18 +795,27 @@ h2 {
     background: white;
     z-index: 9999999999;
   }
-  .lineItem-image-new {
-    height: 150px;
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    border-top: 1px solid black;
-  }
   .Line-item__title-new {
     font-size: 10px;
     font-family: lucon;
   }
   .quant-text {
     display: none;
+  }
+  .images-product-bind {
+    position: relative;
+    overflow: hidden;
+    /* height: 100%; */
+    display: flex;
+    touch-action: none;
+    max-width: 250px;
+    margin: auto;
+  }
+  .content-box {
+    border: 1.5px solid black;
+    width: 100%;
+    height: 150px;
+    overflow: scroll;
   }
 }
 
@@ -816,15 +830,23 @@ h2 {
     background: white;
     z-index: 9999999999;
   }
-  .lineItem-image-new {
-    height: 250px;
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    border-top: 1px solid black;
-  }
   .Line-item__title-new {
     font-size: 22px;
     font-family: lucon;
+  }
+  .images-product-bind {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    touch-action: none;
+    max-width: 500px;
+    margin: auto;
+  }
+  .content-box {
+    border: 1.5px solid black;
+    width: 100%;
+    height: 250px;
+    overflow: scroll;
   }
 }
 
@@ -834,6 +856,7 @@ h2 {
   font-size: 20px;
   margin-left: 5px;
   position: absolute;
+  color: black;
 }
 
 .box-content {
@@ -845,13 +868,6 @@ h2 {
 .cart-text {
   font-size: 20px;
   font-family: lucon;
-}
-
-.content-box {
-  border: 1.5px solid black;
-  width: 100%;
-  height: 250px;
-  overflow: scroll;
 }
 
 .Line-item__quantity-update {
@@ -878,6 +894,7 @@ h2 {
   position: relative;
   opacity: 1;
   transition: opacity 0.2s ease-in-out;
+  list-style: none;
 }
 
 .Line-item__remove-new {
@@ -885,6 +902,7 @@ h2 {
   border: none;
   font-size: 20px;
   position: absolute;
+  color: black;
 }
 
 .Line-item__content-row {
@@ -901,7 +919,7 @@ h2 {
 }
 
 .text-amount-size {
-  font-size: 18pt;
+  font-size: 16pt;
 }
 
 .new-cart-checkout {
@@ -915,6 +933,7 @@ h2 {
   border-radius: 5px;
   padding-left: 15px;
   padding-right: 15px;
+  margin-top: 15px;
 }
 
 .bg-cart {
@@ -948,14 +967,6 @@ h2 {
   margin: auto;
 }
 
-.images-product-bind {
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  display: flex;
-  touch-action: none;
-}
-
 .img-drag {
   object-fit: contain;
   touch-action: none;
@@ -964,11 +975,34 @@ h2 {
   user-select: none;
 }
 
+.container-dot-two {
+  position: relative;
+  overflow: hidden;
+  /* height: 100%; */
+  display: flex;
+  width: 100%;
+  height: 20px;
+}
+
 .container-dot {
   text-align: center;
   width: 100%;
-  bottom: 0;
   position: absolute;
+}
 
-  /* background: red; */
+@media only screen and (max-width: 768px) {
+  .lineitem-item-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .lineitem-item-text {
+    font-size: 1.5rem;
+  }
+}
+
+.lineItem-image-new {
+  width: 100%;
+  padding: 5px;
 }
