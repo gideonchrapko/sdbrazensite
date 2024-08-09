@@ -76,7 +76,7 @@ export default function Cart() {
             <div style={{ padding: '5px' }}>
               <Row>
                 <Col>
-                  <h3>Subtotal</h3>
+                  <h3 className="lineitem-item-text">Subtotal</h3>
                 </Col>
                 <Col>
                   <h3

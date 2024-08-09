@@ -62,7 +62,7 @@ function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
         <h3 className="lineitem-item-text">{lineItem.title}</h3>
         <h3 className="lineitem-item-text">Size: {lineItem.variant.title}</h3>
       </Col>
-      <Col xs={3} style={{ paddingTop: '5px' }}>
+      <Col xs={2} style={{ paddingTop: '5px' }}>
         <select
           value={lineItem.quantity}
           onChange={(e) => handleQuantity(lineItem.id, Number(e.target.value))}
@@ -79,7 +79,7 @@ function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
         </select>
       </Col>
       <Col
-        xs={{ span: 2 }}
+        xs={{ span: 3 }}
         style={{
           paddingTop: '5px',
           textAlign: 'right',
