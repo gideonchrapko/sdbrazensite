@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useShopify } from '../hooks';
 import { Col, Row } from 'react-bootstrap';
 
@@ -16,21 +16,19 @@ export default function LineItem() {
       {checkoutState.lineItems &&
         checkoutState.lineItems.map((lineItem, i) => {
           return (
-            <div style={{ display: 'flex' }}>
-              <div style={{ position: 'relative' }}>
-                <button
-                  className="Line-item__remove-new"
-                  style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}
-                  onClick={(e) => deleteLineItem(lineItem.id, e)}
-                >
-                  x
-                </button>
-                <LineItemChild
-                  checkoutState={checkoutState}
-                  updateQuantity={updateQuantity}
-                  lineItem={lineItem}
-                />
+            <div style={{ position: 'relative' }}>
+              <div
+                className="Line-item__remove-new"
+                style={{ zIndex: 9 }}
+                onClick={(e) => deleteLineItem(lineItem.id, e)}
+              >
+                x
               </div>
+              <LineItemChild
+                checkoutState={checkoutState}
+                updateQuantity={updateQuantity}
+                lineItem={lineItem}
+              />
             </div>
           );
         })}

@@ -1,16 +1,10 @@
 import React, { useEffect } from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import LineItem from './LineItem';
 import { useShopify } from '../hooks';
 
-// import CartIcon from '../Assets/ShoppingCart.svg';
-// import Logo from "../Assets/logo.png"
-// import Close from "../Assets/Close.svg"
-
 export default function Cart() {
-  const mobile = window.innerWidth < 600;
-  const { cartStatus, closeCart, checkoutState, setCount, openCart } =
-    useShopify();
+  const { cartStatus, closeCart, checkoutState, setCount } = useShopify();
 
   function handleClose(e) {
     e.preventDefault();
@@ -42,14 +36,16 @@ export default function Cart() {
     <>
       {cartStatus && (
         <>
-          <div className="new-cart-div" style={{ padding: '10px' }}>
-            <button className="close-cart-text" onClick={(e) => handleClose(e)}>
+          <div className="new-cart-div">
+            <div className="close-cart-text" onClick={(e) => handleClose(e)}>
               x
-            </button>
+            </div>
             <div
               style={{
                 marginTop: '40px',
                 borderBottom: 'solid 2px black',
+                marginLeft: '5px',
+                marginRight: '5px',
               }}
             >
               <Row>
