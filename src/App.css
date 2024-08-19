@@ -147,6 +147,7 @@ h2 {
 
 .Cart__line-items {
   list-style: none;
+  list-style: none;
   flex: 1 0 auto;
   margin: 0;
   padding: 20px;
@@ -658,6 +659,13 @@ h2 {
     color: black;
     max-width: 325px;
   }
+  .text-modal {
+    font-family: lucon;
+    font-size: 11pt;
+    line-height: 1;
+    color: black;
+    max-width: 325px;
+  }
 }
 
 @media only screen and (min-width: 769px) {
@@ -679,6 +687,19 @@ h2 {
   .padding {
     padding: 30px;
   }
+  .text-modal {
+    font-family: lucon;
+    font-size: 15pt;
+    line-height: 1;
+    color: black;
+    max-width: 500px;
+  }
+}
+
+.text-bottom-modal {
+  color: black;
+  position: absolute;
+  bottom: 0;
   .text-modal {
     font-family: lucon;
     font-size: 15pt;
@@ -728,6 +749,7 @@ h2 {
   font-family: lucon;
   font-size: 13pt;
   line-height: 0.5;
+  margin-top: 5px;
   margin-top: 5px;
 }
 
@@ -801,6 +823,21 @@ h2 {
   }
   .quant-text {
     display: none;
+  }
+  .images-product-bind {
+    position: relative;
+    overflow: hidden;
+    /* height: 100%; */
+    display: flex;
+    touch-action: none;
+    max-width: 250px;
+    margin: auto;
+  }
+  .content-box {
+    border: 1.5px solid black;
+    width: 100%;
+    height: 150px;
+    overflow: scroll;
   }
   .images-product-bind {
     position: relative;
@@ -894,6 +931,7 @@ h2 {
 
 .text-amount-size {
   font-size: 16pt;
+  font-size: 16pt;
 }
 
 .new-cart-checkout {
@@ -907,6 +945,7 @@ h2 {
   border-radius: 5px;
   padding-left: 15px;
   padding-right: 15px;
+  margin-top: 15px;
   margin-top: 15px;
 }
 
@@ -947,6 +986,15 @@ h2 {
   -moz-user-select: none;
   -webkit-user-drag: none;
   user-select: none;
+}
+
+.container-dot-two {
+  position: relative;
+  overflow: hidden;
+  /* height: 100%; */
+  display: flex;
+  width: 100%;
+  height: 20px;
 }
 
 .container-dot-two {
