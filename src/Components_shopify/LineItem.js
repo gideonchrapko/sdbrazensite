@@ -5,8 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 export default function LineItem() {
   const { checkoutState, updateQuantity, removeLineItem } = useShopify();
 
-  function deleteLineItem(lineItemId, e) {
-    e.preventDefault();
+  function deleteLineItem(lineItemId) {
     const checkoutId = checkoutState.id;
     removeLineItem(checkoutId, lineItemId);
   }
@@ -37,8 +36,7 @@ export default function LineItem() {
 }
 
 function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
-  function handleQuantity(lineItemId, quantity, e) {
-    e.preventDefault();
+  function handleQuantity(lineItemId, quantity) {
     const checkoutId = checkoutState.id;
     const updatedQuantity = quantity;
 
@@ -46,7 +44,7 @@ function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
   }
 
   return (
-    <Row>
+    <Row style={{ borderBottom: '2px solid black' }}>
       <Col xs={{ span: 3 }}>
         {lineItem.variant.image ? (
           <img

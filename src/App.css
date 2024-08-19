@@ -975,6 +975,7 @@ h2 {
     position: absolute;
     color: black;
     margin-left: 5px;
+    cursor: pointer;
   }
   .Line-item__remove-new {
     background: none;
@@ -984,6 +985,7 @@ h2 {
     color: black;
     top: 0px;
     left: 3px;
+    cursor: pointer;
   }
   .Line-item {
     overflow: hidden;
@@ -1007,6 +1009,7 @@ h2 {
     margin-left: 10px;
     position: absolute;
     color: black;
+    cursor: pointer;
   }
   .Line-item__remove-new {
     background: none;
@@ -1016,6 +1019,7 @@ h2 {
     color: black;
     top: 0px;
     left: 0px;
+    cursor: pointer;
   }
   .Line-item {
     overflow: hidden;
