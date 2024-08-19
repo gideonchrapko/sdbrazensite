@@ -99,7 +99,7 @@ export default function Cart() {
                     }}
                     onClick={(e) => openCheckout(e)}
                   >
-                    <h3>Checkou</h3>
+                    <h3>Checkout</h3>
                   </button>
                 </Col>
               </Row>
