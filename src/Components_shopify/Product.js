@@ -3,21 +3,20 @@ import { useShopify } from '../hooks';
 import { Row, Col, Container } from 'react-bootstrap';
 
 import { useParams } from 'react-router-dom';
-// import SizeVariant from './SizeVariants';
 
 export default function Product() {
   const { product, fetchProduct, openCart, checkoutState, addVariant } =
     useShopify();
 
   const { productHandle } = useParams();
-  // const defaultSize = product.variants && product.variants[0].id.toString();
   const [size, setSize] = useState('');
   const [click, setClicked] = useState(false);
   const [available, setAvailable] = useState(true);
   const [sizeSelected, setSizeSelected] = useState(false);
-  // const [sizeTitle, setSizeTitle] = useState('');
   const [quantity, setQuantity] = useState(1);
   const description = product.description && product.description.split('.');
+  const [imageIndex, setImageIndex] = useState(0);
+  console.log(product.images[imageIndex].src, 'imageIndex');
 
   function changeSize(sizeId, quantity) {
     openCart();
@@ -53,24 +52,19 @@ export default function Product() {
             overflow: 'scroll',
           }}
         >
-          {product.images &&
-            product.images.map((image, i) => {
-              return (
-                <img
-                  key={image.id + i}
-                  src={image.src}
-                  alt={`${product.title} product shot`}
-                />
-              );
-            })}
+          <img
+            key={product.images[imageIndex].id}
+            src={product.images[imageIndex].src}
+            alt={`${product.title} product shot`}
+          />
         </Col>
         <Col style={{ height: '100vh' }}>
           <div
             style={{
-              height: '100%', // Fixed height for the parent div
+              height: '100%',
               display: 'flex',
-              alignItems: 'center', // Vertically centers the child div
-              justifyContent: 'center', // Horizontally centers the child div (optional)
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
             <div
@@ -84,17 +78,18 @@ export default function Product() {
                 <h1 style={{ textDecoration: 'underline', fontSize: '20px' }}>
                   {product.title}
                 </h1>
-                <h3 style={{ fontSize: '20px', paddingTop: '10px' }}>
+                <h3 style={{ fontSize: '20px', paddingTop: '15px' }}>
                   ${product.variants && product.variants[0].price.amount}
                 </h3>
-                <h3 style={{ fontSize: '20px', paddingTop: '10px' }}>
+                <h3 style={{ fontSize: '20px', paddingTop: '15px' }}>
                   Shipping Calculated at checkout
                 </h3>
                 <div
                   style={{
                     display: 'flex',
-                    alignItems: 'center', // Vertically center the items
+                    alignItems: 'center',
                     fontSize: '20px',
+                    paddingTop: '15px',
                   }}
                 >
                   Size:
@@ -126,8 +121,9 @@ export default function Product() {
                 <div
                   style={{
                     display: 'flex',
-                    alignItems: 'center', // Vertically center the items
+                    alignItems: 'center',
                     fontSize: '20px',
+                    paddingTop: '15px',
                   }}
                 >
                   Quantity:
@@ -161,7 +157,7 @@ export default function Product() {
                   style={{
                     fontSize: '20px',
                     listStyleType: 'none',
-                    paddingTop: '10px',
+                    paddingTop: '20px',
                   }}
                 >
                   {description &&
@@ -175,7 +171,7 @@ export default function Product() {
                       background: 'black',
                       color: 'white',
                       width: '200px',
-                      marginTop: '10px',
+                      marginTop: '15px',
                       fontSize: '20px',
                       border: 'none',
                     }}
@@ -189,7 +185,7 @@ export default function Product() {
                       background: 'black',
                       color: 'white',
                       width: '200px',
-                      marginTop: '10px',
+                      marginTop: '15px',
                       fontSize: '20px',
                       border: 'none',
                     }}
@@ -197,6 +193,25 @@ export default function Product() {
                     {sizeSelected ? 'Out of Stock' : 'Select a Size'}
                   </button>
                 )}
+                <div
+                  style={{ display: 'flex', marginTop: '20px', gap: '10px' }}
+                >
+                  {product.images &&
+                    product.images.map((image, i) => {
+                      return (
+                        <img
+                          key={image.id + i}
+                          src={image.src}
+                          alt={`${product.title} product shot`}
+                          style={{ width: '60px', border: '1px black solid' }}
+                          onClick={() => setImageIndex(i)}
+                        />
+                      );
+                    })}
+                </div>
+                <h3 style={{ fontSize: '20px', paddingTop: '20px' }}>
+                  Design by SD Music Group 2024
+                </h3>
               </div>
             </div>
           </div>
@@ -205,116 +220,4 @@ export default function Product() {
       <Row></Row>
     </Container>
   );
-}
-
-{
-  /* <Row className="Product-wrapper2">
-  <Col
-    className="Images"
-    style={{ marginLeft: '30px', background: 'red' }}
-    sm={{ span: 12 }}
-    lg={{ span: 6 }}
-    md={{ span: 6 }}
-  >
-    {product.images &&
-      product.images.map((image, i) => {
-        return (
-          <img
-            className="Product_Image"
-            key={image.id + i}
-            src={image.src}
-            alt={`${product.title} product shot`}
-          />
-        );
-      })}
-  </Col>
-  <Col className="Product__info">
-    <h2 className="Product__title2">{product.title}</h2>
-    <h3 className="Productview__price">
-      ${product.variants && product.variants[0].price}
-    </h3>
-    <label htmlFor={'prodOptions'} style={{ marginTop: '2%' }}>
-      Size
-    </label>
-    <br />
-    <div style={{ width: '90%', position: 'relative' }}>
-            <div
-              className="style__dropdown"
-              id="prodOptions"
-              onClick={(e) => {
-                setdropDownMenu(!dropDownMenu);
-                setRotate(!rotate);
-              }}
-            >
-              {sizeTitle ? sizeTitle : 'Pick a Size'}
-              <animated.img
-                src={DropDownArrow}
-                alt="drop down arrow"
-                style={rotationAnimation}
-                className="dropDownArrow"
-              />
-            </div>
-            <animated.div
-              className="style__dropdownDiv"
-              style={dropDownMenuAnimation}
-            >
-              {product.variants &&
-                product.variants.map((item, i) => {
-                  return (
-                    <li
-                      onClick={(e) => {
-                        clickFunction(item, i);
-                      }}
-                      className={
-                        item.available ? 'size__option' : 'size__option2'
-                      }
-                      key={item.title + i}
-                    >{`${item.title}`}</li>
-                  );
-                })}
-            </animated.div>
-          </div>
-    <div style={{ marginTop: '2%' }}>
-      <label>Quantity</label>
-      <br />
-      <div className="prodQuantity-container">
-              {quantity > 1 ? (
-                <button
-                  className="prodQuantity-update"
-                  onClick={() => setQuantity(quantity - 1)}
-                >
-                  -
-                </button>
-              ) : (
-                <button className="prodQuantity-update">-</button>
-              )}
-              <span className="prodQuantity" style={{ color: 'white' }}>
-                {quantity}
-              </span>
-              <button
-                className="prodQuantity-update"
-                onClick={() => setQuantity(quantity + 1)}
-              >
-                +
-              </button>
-            </div>
-    </div>
-    {product.availableForSale ? (
-      <button
-        className="prodBuyButton"
-        onClick={(e) => changeSize(size, quantity)}
-      >
-        Add to Cart
-      </button>
-    ) : (
-      <button className="prodBuyButtonSold">Sold Out</button>
-    )}
-    <div className="Product__description">
-      {description &&
-              description.map((each, i) => {
-                return <li key={`line-description +${i}`}>{each}</li>;
-              })}
-    </div>
-  </Col>
-</Row>; */
 }

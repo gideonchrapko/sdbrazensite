@@ -9,6 +9,7 @@ import Footer from './Components/Footer';
 
 import './App.css';
 import Product from './Components_shopify/Product';
+import Header from './Components/HeaderNew';
 
 function App() {
   const { createShop, createCheckout, fetchProducts } = useShopify();
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div id="App">
+      <Header />
       <Routes>
         <Route exacta path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
