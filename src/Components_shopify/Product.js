@@ -1,37 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useShopify } from '../hooks';
 import { Row, Col, Container } from 'react-bootstrap';
-
 import { useParams } from 'react-router-dom';
 
 export default function Product() {
   const { product, fetchProduct, openCart, checkoutState, addVariant } =
     useShopify();
-
   const { productHandle } = useParams();
   const [size, setSize] = useState('');
   const [click, setClicked] = useState(false);
   const [available, setAvailable] = useState(true);
   const [sizeSelected, setSizeSelected] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const description = product.description && product.description.split('.');
+  const description = product?.description && product?.description.split('.');
   const [imageIndex, setImageIndex] = useState(0);
-  console.log(product.images[imageIndex].src, 'imageIndex');
+  const imagesContainerRef = useRef(null);
 
   function changeSize(sizeId, quantity) {
     openCart();
     if (sizeId === '') {
-      sizeId = product.variants[0].id;
+      sizeId = product?.variants[0].id;
       const lineItemsToAdd = [
         { variantId: sizeId, quantity: parseInt(quantity, 10) },
       ];
-      const checkoutId = checkoutState.id;
+      const checkoutId = checkoutState?.id;
       addVariant(checkoutId, lineItemsToAdd);
     } else {
       const lineItemsToAdd = [
         { variantId: sizeId, quantity: parseInt(quantity, 10) },
       ];
-      const checkoutId = checkoutState.id;
+      const checkoutId = checkoutState?.id;
       addVariant(checkoutId, lineItemsToAdd);
     }
   }
@@ -39,6 +37,22 @@ export default function Product() {
   useEffect(() => {
     fetchProduct(productHandle);
   }, [productHandle]);
+
+  const handleImageClickScroll = (index) => {
+    setImageIndex(index);
+    if (imagesContainerRef.current) {
+      const imageElement = imagesContainerRef.current.children[index];
+      if (imageElement) {
+        imageElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  const handleImageIndex = (index) => {
+    setImageIndex(index);
+  };
+
+  // console.log(product?.images[0]?.src, 'image index');
 
   return (
     <Container fluid>
@@ -51,37 +65,67 @@ export default function Product() {
             padding: '100px',
             overflow: 'scroll',
           }}
+          ref={imagesContainerRef}
+          className="mobile-hiding"
         >
-          <img
-            key={product.images[imageIndex].id}
-            src={product.images[imageIndex].src}
-            alt={`${product.title} product shot`}
-          />
+          {product?.images &&
+            product.images.map((image, i) => (
+              <img
+                key={image.id}
+                src={image.src}
+                alt={`${product?.title} product shot`}
+              />
+            ))}
         </Col>
+
         <Col style={{ height: '100vh' }}>
-          <div
-            style={{
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
+          <div className="product-details-container">
+            {product?.images && (
+              <div className="desktop-hiding-images">
+                <img
+                  src={product.images[imageIndex].src}
+                  style={{
+                    height: '100%',
+                    overflow: 'scroll',
+                    marginTop: '40px',
+                  }}
+                  alt="product"
+                />
+              </div>
+            )}
             <div
               style={{
                 width: '100%',
                 paddingLeft: '40px',
                 paddingRight: '40px',
               }}
+              className="bottom-mobile-content"
             >
               <div>
+                <div
+                  style={{
+                    marginTop: '20px',
+                    gap: '10px',
+                    marginBottom: '20px',
+                  }}
+                  className="desktop-hiding-images"
+                >
+                  <ImageSelector
+                    images={product?.images}
+                    title={product?.title}
+                    handleImage={handleImageIndex}
+                  />
+                </div>
                 <h1 style={{ textDecoration: 'underline', fontSize: '20px' }}>
                   {product.title}
                 </h1>
                 <h3 style={{ fontSize: '20px', paddingTop: '15px' }}>
                   ${product.variants && product.variants[0].price.amount}
                 </h3>
-                <h3 style={{ fontSize: '20px', paddingTop: '15px' }}>
+                <h3
+                  style={{ fontSize: '20px', paddingTop: '15px' }}
+                  className="shipping-calculated-text"
+                >
                   Shipping Calculated at checkout
                 </h3>
                 <div
@@ -168,13 +212,11 @@ export default function Product() {
                 {sizeSelected && available ? (
                   <button
                     style={{
-                      background: 'black',
-                      color: 'white',
                       width: '200px',
                       marginTop: '15px',
                       fontSize: '20px',
-                      border: 'none',
                     }}
+                    className="add-to-cart-button button-mobile"
                     onClick={() => changeSize(size, quantity)}
                   >
                     Add to cart
@@ -182,34 +224,30 @@ export default function Product() {
                 ) : (
                   <button
                     style={{
-                      background: 'black',
-                      color: 'white',
                       width: '200px',
                       marginTop: '15px',
                       fontSize: '20px',
                       border: 'none',
                     }}
+                    className="add-to-cart-outofstock button-mobile"
                   >
                     {sizeSelected ? 'Out of Stock' : 'Select a Size'}
                   </button>
                 )}
                 <div
-                  style={{ display: 'flex', marginTop: '20px', gap: '10px' }}
+                  style={{ marginTop: '20px', gap: '10px' }}
+                  className="mobile-hiding-heloeleleoeoe"
                 >
-                  {product.images &&
-                    product.images.map((image, i) => {
-                      return (
-                        <img
-                          key={image.id + i}
-                          src={image.src}
-                          alt={`${product.title} product shot`}
-                          style={{ width: '60px', border: '1px black solid' }}
-                          onClick={() => setImageIndex(i)}
-                        />
-                      );
-                    })}
+                  <ImageSelector
+                    images={product?.images}
+                    title={product?.title}
+                    handleImage={handleImageClickScroll}
+                  />
                 </div>
-                <h3 style={{ fontSize: '20px', paddingTop: '20px' }}>
+                <h3
+                  style={{ fontSize: '20px', paddingTop: '20px' }}
+                  className="mobile-hiding"
+                >
                   Design by SD Music Group 2024
                 </h3>
               </div>
@@ -217,7 +255,26 @@ export default function Product() {
           </div>
         </Col>
       </Row>
-      <Row></Row>
     </Container>
+  );
+}
+
+function ImageSelector({ images, title, handleImage }) {
+  return (
+    <>
+      {images &&
+        images.map((image, i) => {
+          return (
+            <img
+              key={image.id + i}
+              src={image.src}
+              alt={`${title} product shot`}
+              style={{ width: '60px', cursor: 'pointer' }}
+              onClick={() => handleImage(i)}
+              className="product-image-hover"
+            />
+          );
+        })}
+    </>
   );
 }
