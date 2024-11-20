@@ -3,6 +3,27 @@ import { useShopify } from '../hooks';
 import { Row, Col, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
+const ImageDots = ({ images, currentIndex }) => {
+  return (
+    <div
+      style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}
+    >
+      {images.map((_, index) => (
+        <div
+          key={index}
+          style={{
+            width: '8px',
+            height: '8px',
+            borderRadius: '50%',
+            backgroundColor: index === currentIndex ? 'black' : '#d3d3d3',
+            margin: '0 4px',
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 export default function Product() {
   const { product, fetchProduct, openCart, checkoutState, addVariant } =
     useShopify();
@@ -52,8 +73,6 @@ export default function Product() {
     setImageIndex(index);
   };
 
-  // console.log(product?.images[0]?.src, 'image index');
-
   return (
     <Container fluid>
       <Row style={{ fontFamily: 'lucon' }}>
@@ -81,7 +100,10 @@ export default function Product() {
         <Col style={{ height: '100vh' }}>
           <div className="product-details-container">
             {product?.images && (
-              <div className="desktop-hiding-images">
+              <div
+                className="desktop-hiding-images"
+                style={{ flexDirection: 'column' }}
+              >
                 <img
                   src={product.images[imageIndex].src}
                   style={{
@@ -91,6 +113,7 @@ export default function Product() {
                   }}
                   alt="product"
                 />
+                <ImageDots images={product.images} currentIndex={imageIndex} />
               </div>
             )}
             <div
@@ -120,7 +143,7 @@ export default function Product() {
                   {product.title}
                 </h1>
                 <h3 style={{ fontSize: '20px', paddingTop: '15px' }}>
-                  ${product.variants && product.variants[0].price.amount}
+                  ${product.variants && product.variants[0].price.amount}0
                 </h3>
                 <h3
                   style={{ fontSize: '20px', paddingTop: '15px' }}
@@ -201,18 +224,26 @@ export default function Product() {
                   style={{
                     fontSize: '20px',
                     listStyleType: 'none',
-                    paddingTop: '20px',
+                    paddingTop: '10px',
                   }}
                 >
                   {description &&
                     description.map((each, i) => {
-                      return <li key={`line-description +${i}`}>{each}</li>;
+                      return (
+                        <li
+                          style={{ fontSize: '15px' }}
+                          key={`line-description +${i}`}
+                        >
+                          {each}
+                        </li>
+                      );
                     })}
                 </div>
                 {sizeSelected && available ? (
                   <button
                     style={{
-                      width: '200px',
+                      width: '100%',
+                      maxWidth: '300px',
                       marginTop: '15px',
                       fontSize: '20px',
                     }}
@@ -224,7 +255,8 @@ export default function Product() {
                 ) : (
                   <button
                     style={{
-                      width: '200px',
+                      width: '100%',
+                      maxWidth: '300px',
                       marginTop: '15px',
                       fontSize: '20px',
                       border: 'none',
