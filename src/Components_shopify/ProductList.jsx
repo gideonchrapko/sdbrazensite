@@ -1,6 +1,7 @@
 import { useShopify } from '../hooks';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useCheckCompleteSoldOut } from '../hooks/use-complete-sold-out';
 
 export default function ProductList() {
   const { products } = useShopify();
@@ -27,6 +28,7 @@ export default function ProductList() {
 function SingleProduct(props) {
   const { product } = props;
   const navigate = useNavigate();
+  const completelySoldOut = useCheckCompleteSoldOut(product.variants);
 
   const handleRoute = () => {
     navigate(`/product/${product?.handle}`);
@@ -57,6 +59,9 @@ function SingleProduct(props) {
         }}
       >
         <h1 className="product-new-title">{product.title}</h1>
+        <span className="product-new-title" style={{ color: 'red' }}>
+          {completelySoldOut && 'Sold Out'}
+        </span>
       </div>
     </Col>
   );

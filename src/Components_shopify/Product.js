@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useShopify } from '../hooks';
 import { Row, Col, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { useSwipeable } from 'react-swipeable';
+import { motion } from 'framer-motion';
+import { useCheckCompleteSoldOut } from '../hooks/use-complete-sold-out';
 
 const ImageDots = ({ images, currentIndex }) => {
   return (
@@ -36,6 +39,8 @@ export default function Product() {
   const description = product?.description && product?.description.split('.');
   const [imageIndex, setImageIndex] = useState(0);
   const imagesContainerRef = useRef(null);
+  const variants = product?.variants;
+  const completelySoldOut = useCheckCompleteSoldOut(variants);
 
   function changeSize(sizeId, quantity) {
     openCart();
@@ -68,10 +73,32 @@ export default function Product() {
       }
     }
   };
+  // Swipe handlers
+  const handleSwipeLeft = () => {
+    if (product?.images) {
+      setImageIndex((prevIndex) => (prevIndex + 1) % product.images.length);
+    }
+  };
+
+  const handleSwipeRight = () => {
+    if (product?.images) {
+      setImageIndex((prevIndex) =>
+        prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
+      );
+    }
+  };
 
   const handleImageIndex = (index) => {
     setImageIndex(index);
   };
+
+  // Use swipeable hook for gesture detection
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: handleSwipeLeft,
+    onSwipedRight: handleSwipeRight,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
 
   return (
     <Container fluid>
@@ -79,41 +106,45 @@ export default function Product() {
         <Col
           sm={{ span: 12 }}
           md={{ span: 7 }}
-          style={{
-            height: '100vh',
-            padding: '100px',
-            overflow: 'scroll',
-          }}
+          style={{ height: '100vh', padding: '100px', overflow: 'scroll' }}
           ref={imagesContainerRef}
           className="mobile-hiding"
         >
           {product?.images &&
             product.images.map((image, i) => (
-              <img
+              <motion.img
                 key={image.id}
                 src={image.src}
                 alt={`${product?.title} product shot`}
+                transition={{ duration: 0.5 }}
               />
             ))}
         </Col>
-
-        <Col style={{ height: '100vh' }}>
+        <Col style={{ height: '100vh', position: 'relative' }}>
           <div className="product-details-container">
             {product?.images && (
-              <div
-                className="desktop-hiding-images"
-                style={{ flexDirection: 'column' }}
-              >
-                <img
-                  src={product.images[imageIndex].src}
-                  style={{
-                    height: '100%',
-                    overflow: 'scroll',
-                    marginTop: '40px',
-                  }}
-                  alt="product"
-                />
-                <ImageDots images={product.images} currentIndex={imageIndex} />
+              <div {...swipeHandlers}>
+                <div
+                  className="desktop-hiding-images"
+                  style={{ flexDirection: 'column', position: 'relative' }} // Ensure relative positioning for child elements
+                >
+                  <motion.img
+                    src={product.images[imageIndex].src}
+                    style={{
+                      height: '100%',
+                      overflow: 'scroll',
+                      marginTop: '40px',
+                      zIndex: 0, // Ensure it's below the motion images
+                    }}
+                    alt="product"
+                    animate={{ x: 0 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  />
+                  <ImageDots
+                    images={product.images}
+                    currentIndex={imageIndex}
+                  />
+                </div>
               </div>
             )}
             <div
@@ -139,25 +170,24 @@ export default function Product() {
                     handleImage={handleImageIndex}
                   />
                 </div>
-                <h1 style={{ textDecoration: 'underline', fontSize: '20px' }}>
+                <h3 className="details-font">
                   {product.title}
-                </h1>
-                <h3 style={{ fontSize: '20px', paddingTop: '15px' }}>
+                  <span style={{ color: 'red' }}>
+                    {completelySoldOut && ' - Sold Out'}
+                  </span>
+                </h3>
+                <h3 className="details-font">
                   ${product.variants && product.variants[0].price.amount}0
                 </h3>
-                <h3
-                  style={{ fontSize: '20px', paddingTop: '15px' }}
-                  className="shipping-calculated-text"
-                >
+                <h3 className="shipping-calculated-text details-font">
                   Shipping Calculated at checkout
                 </h3>
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    fontSize: '20px',
-                    paddingTop: '15px',
                   }}
+                  className="details-font"
                 >
                   Size:
                   {product.variants &&
@@ -189,9 +219,8 @@ export default function Product() {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    fontSize: '20px',
-                    paddingTop: '15px',
                   }}
+                  className="details-font"
                 >
                   Quantity:
                   <div
@@ -222,21 +251,13 @@ export default function Product() {
 
                 <div
                   style={{
-                    fontSize: '20px',
                     listStyleType: 'none',
-                    paddingTop: '10px',
                   }}
+                  className="details-font"
                 >
                   {description &&
                     description.map((each, i) => {
-                      return (
-                        <li
-                          style={{ fontSize: '15px' }}
-                          key={`line-description +${i}`}
-                        >
-                          {each}
-                        </li>
-                      );
+                      return <li key={`line-description +${i}`}>{each}</li>;
                     })}
                 </div>
                 {sizeSelected && available ? (
