@@ -4,7 +4,7 @@ import Cart from '../Components_shopify/Cart';
 import { useShopify } from '../hooks';
 
 import Image from '../Assets/LLB.png';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Modal = ({ modalClose }) => {
   return (
@@ -63,12 +63,19 @@ export default function Header() {
   const location = useLocation();
   const { openCart } = useShopify();
   const [viewModal, setViewModal] = useState(false);
+
   const modalOpen = useCallback(() => {
     setViewModal(true);
   }, []);
   const modalClose = useCallback(() => {
     setViewModal(false);
   }, []);
+
+  if (typeof location === 'string') {
+    console.log(location.pathname.includes('hello'));
+  } else {
+    console.log('Location is not a string');
+  }
 
   return (
     <div style={{ position: 'fixed', zIndex: '99' }}>
@@ -79,6 +86,13 @@ export default function Header() {
             <button onClick={modalOpen} className="button-modal">
               Info
             </button>
+            {location.pathname.includes('/product') && (
+              <Link to="/home">
+                <button className="button-modal" style={{ marginLeft: '20px' }}>
+                  Home
+                </button>
+              </Link>
+            )}
           </div>
           <div style={{ position: 'fixed', top: 0, right: 0, padding: '10px' }}>
             <button onClick={openCart} className="button-modal">
