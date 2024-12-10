@@ -88,7 +88,7 @@ export default function Header() {
             </button>
             {location.pathname.includes('/product') && (
               <Link to="/home">
-                <button className="button-modal" style={{ marginLeft: '20px' }}>
+                <button className="button-modal" style={{ marginLeft: '12px' }}>
                   Home
                 </button>
               </Link>
