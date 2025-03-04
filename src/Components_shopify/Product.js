@@ -260,7 +260,35 @@ export default function Product() {
                       return <li key={`line-description +${i}`}>{each}</li>;
                     })}
                 </div>
-                {sizeSelected && available ? (
+
+                {completelySoldOut ? (
+                  <button
+                    style={{
+                      width: '100%',
+                      maxWidth: '300px',
+                      marginTop: '15px',
+                      fontSize: '20px',
+                      border: 'none',
+                    }}
+                    className="add-to-cart-outofstock button-mobile"
+                  >
+                    {sizeSelected ? 'Out of Stock' : 'Select a Size'}
+                  </button>
+                ) : (
+                  <button
+                    style={{
+                      width: '100%',
+                      maxWidth: '300px',
+                      marginTop: '15px',
+                      fontSize: '20px',
+                    }}
+                    className="add-to-cart-button button-mobile"
+                    onClick={() => changeSize(size, quantity)}
+                  >
+                    Add to cart
+                  </button>
+                )}
+                {/* {sizeSelected && available ? (
                   <button
                     style={{
                       width: '100%',
@@ -286,7 +314,8 @@ export default function Product() {
                   >
                     {sizeSelected ? 'Out of Stock' : 'Select a Size'}
                   </button>
-                )}
+                )} */}
+
                 <div
                   style={{ marginTop: '20px', gap: '10px' }}
                   className="mobile-hiding-heloeleleoeoe"
