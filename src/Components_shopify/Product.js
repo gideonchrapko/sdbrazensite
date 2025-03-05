@@ -41,6 +41,7 @@ export default function Product() {
   const imagesContainerRef = useRef(null);
   const variants = product?.variants;
   const completelySoldOut = useCheckCompleteSoldOut(variants);
+  const hideVariants = product?.variants?.length === 1;
 
   function changeSize(sizeId, quantity) {
     openCart();
@@ -182,38 +183,40 @@ export default function Product() {
                 <h3 className="shipping-calculated-text details-font">
                   Shipping Calculated at checkout
                 </h3>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                  className="details-font"
-                >
-                  Size:
-                  {product.variants &&
-                    product.variants.map((variant, item) => {
-                      return (
-                        <div
-                          key={variant.title + item}
-                          onClick={(e) => {
-                            setSize(variant.id.toString());
-                            setClicked(item);
-                            setAvailable(variant.available);
-                            setSizeSelected(true);
-                          }}
-                          style={{
-                            paddingLeft: '40px',
-                            cursor: 'pointer',
-                            color: variant.available
-                              ? `${click === item ? '#FF09B1' : 'black'}`
-                              : 'grey',
-                          }}
-                        >
-                          {variant.title}
-                        </div>
-                      );
-                    })}
-                </div>
+                {!hideVariants && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                    className="details-font"
+                  >
+                    Size:
+                    {product.variants &&
+                      product.variants.map((variant, item) => {
+                        return (
+                          <div
+                            key={variant.title + item}
+                            onClick={(e) => {
+                              setSize(variant.id.toString());
+                              setClicked(item);
+                              setAvailable(variant.available);
+                              setSizeSelected(true);
+                            }}
+                            style={{
+                              paddingLeft: '40px',
+                              cursor: 'pointer',
+                              color: variant.available
+                                ? `${click === item ? '#FF09B1' : 'black'}`
+                                : 'grey',
+                            }}
+                          >
+                            {variant.title}
+                          </div>
+                        );
+                      })}
+                  </div>
+                )}
 
                 <div
                   style={{
@@ -272,7 +275,11 @@ export default function Product() {
                     }}
                     className="add-to-cart-outofstock button-mobile"
                   >
-                    {sizeSelected ? 'Out of Stock' : 'Select a Size'}
+                    {sizeSelected
+                      ? 'Out of Stock'
+                      : hideVariants
+                      ? 'Out of Stock'
+                      : 'Select a Size'}
                   </button>
                 ) : (
                   <button

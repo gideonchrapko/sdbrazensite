@@ -36,6 +36,7 @@ export default function LineItem() {
 }
 
 function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
+  const hideVariants = lineItem?.variant?.title === 'Default Title';
   function handleQuantity(lineItemId, quantity) {
     const checkoutId = checkoutState.id;
     const updatedQuantity = quantity;
@@ -46,28 +47,32 @@ function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
   return (
     <Row style={{ borderBottom: '2px solid black' }}>
       <Col xs={{ span: 3 }}>
-        {lineItem.variant.image ? (
+        {lineItem?.variant?.image ? (
           <img
-            src={lineItem.variant.image.src}
-            alt={`${lineItem.title} product shot`}
+            src={lineItem?.variant.image.src}
+            alt={`${lineItem?.title} product shot`}
             className="lineItem-image-new"
           />
         ) : null}
       </Col>
       <Col xs={4} style={{ padding: '5px' }}>
-        <h3 className="lineitem-item-text">{lineItem.title}</h3>
-        <h3 className="lineitem-item-text">Size: {lineItem.variant.title}</h3>
+        <h3 className="lineitem-item-text">{lineItem?.title}</h3>
+        {!hideVariants && (
+          <h3 className="lineitem-item-text">
+            Size: {lineItem?.variant?.title}
+          </h3>
+        )}
       </Col>
       <Col xs={2} style={{ paddingTop: '5px' }}>
         <select
-          value={lineItem.quantity}
-          onChange={(e) => handleQuantity(lineItem.id, Number(e.target.value))}
+          value={lineItem?.quantity}
+          onChange={(e) => handleQuantity(lineItem?.id, Number(e.target.value))}
         >
           {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
             <option
               key={n}
               value={`${n}`}
-              onClick={(e) => handleQuantity(lineItem.id, n, e)}
+              onClick={(e) => handleQuantity(lineItem?.id, n, e)}
             >
               {n}
             </option>
@@ -82,7 +87,8 @@ function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
         }}
       >
         <h3 className="lineitem-item-text">
-          $USD {(lineItem.quantity * lineItem.variant.price.amount).toFixed(2)}
+          $USD{' '}
+          {(lineItem?.quantity * lineItem?.variant?.price?.amount).toFixed(2)}
         </h3>
       </Col>
     </Row>
