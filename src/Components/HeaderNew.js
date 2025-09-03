@@ -71,11 +71,7 @@ export default function Header() {
     setViewModal(false);
   }, []);
 
-  if (typeof location === 'string') {
-    console.log(location.pathname.includes('hello'));
-  } else {
-    console.log('Location is not a string');
-  }
+  // Location is always an object from useLocation hook
 
   return (
     <div style={{ position: 'fixed', zIndex: '99' }}>

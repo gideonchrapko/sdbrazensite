@@ -3,19 +3,20 @@ import { useShopify } from '../hooks';
 import { Col, Row } from 'react-bootstrap';
 
 export default function LineItem() {
-  const { checkoutState, updateQuantity, removeLineItem } = useShopify();
+  const { cartState, updateQuantity, removeLineItem } = useShopify();
 
   function deleteLineItem(lineItemId) {
-    const checkoutId = checkoutState.id;
-    removeLineItem(checkoutId, lineItemId);
+    const cartId = cartState.id;
+    removeLineItem(cartId, lineItemId);
   }
 
   return (
     <li className="Line-item">
-      {checkoutState.lineItems &&
-        checkoutState.lineItems.map((lineItem, i) => {
+      {cartState.lines && cartState.lines.edges &&
+        cartState.lines.edges.map((edge, i) => {
+          const lineItem = edge.node;
           return (
-            <div style={{ position: 'relative' }}>
+            <div key={lineItem.id} style={{ position: 'relative' }}>
               <div
                 className="Line-item__remove-new"
                 style={{ zIndex: 9 }}
@@ -24,7 +25,7 @@ export default function LineItem() {
                 x
               </div>
               <LineItemChild
-                checkoutState={checkoutState}
+                cartState={cartState}
                 updateQuantity={updateQuantity}
                 lineItem={lineItem}
               />
@@ -35,31 +36,31 @@ export default function LineItem() {
   );
 }
 
-function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
-  const hideVariants = lineItem?.variant?.title === 'Default Title';
+function LineItemChild({ cartState, updateQuantity, lineItem }) {
+  const hideVariants = lineItem?.merchandise?.title === 'Default Title';
   function handleQuantity(lineItemId, quantity) {
-    const checkoutId = checkoutState.id;
+    const cartId = cartState.id;
     const updatedQuantity = quantity;
 
-    updateQuantity(lineItemId, updatedQuantity, checkoutId);
+    updateQuantity(lineItemId, updatedQuantity, cartId);
   }
 
   return (
     <Row style={{ borderBottom: '2px solid black' }}>
       <Col xs={{ span: 3 }}>
-        {lineItem?.variant?.image ? (
+        {lineItem?.merchandise?.image ? (
           <img
-            src={lineItem?.variant.image.src}
-            alt={`${lineItem?.title} product shot`}
+            src={lineItem?.merchandise.image.url}
+            alt={`${lineItem?.merchandise?.product?.title} product shot`}
             className="lineItem-image-new"
           />
         ) : null}
       </Col>
       <Col xs={4} style={{ padding: '5px' }}>
-        <h3 className="lineitem-item-text">{lineItem?.title}</h3>
+        <h3 className="lineitem-item-text">{lineItem?.merchandise?.product?.title}</h3>
         {!hideVariants && (
           <h3 className="lineitem-item-text">
-            Size: {lineItem?.variant?.title}
+            Size: {lineItem?.merchandise?.title}
           </h3>
         )}
       </Col>
@@ -88,7 +89,7 @@ function LineItemChild({ checkoutState, updateQuantity, lineItem }) {
       >
         <h3 className="lineitem-item-text">
           $USD{' '}
-          {(lineItem?.quantity * lineItem?.variant?.price?.amount).toFixed(2)}
+          {(lineItem?.quantity * lineItem?.merchandise?.price?.amount).toFixed(2)}
         </h3>
       </Col>
     </Row>

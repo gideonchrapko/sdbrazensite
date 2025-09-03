@@ -12,20 +12,20 @@ import Product from './Components_shopify/Product';
 import Header from './Components/HeaderNew';
 
 function App() {
-  const { createShop, createCheckout, fetchProducts } = useShopify();
+  const { createShop, createCart, fetchProducts } = useShopify();
 
   useEffect(() => {
     createShop();
     fetchProducts();
-    createCheckout();
+    createCart();
     window.scrollTo(0, 1);
-  }, []);
+  }, [createShop, fetchProducts, createCart]);
 
   return (
     <div id="App">
       <Header />
       <Routes>
-        <Route exacta path="/" element={<Landing />} />
+        <Route exact path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/product/:productHandle" element={<Product />} />
         <Route path="return-policy" element={<ReturnPolicy />} />

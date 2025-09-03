@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useShopify } from '../hooks';
 
 export const SizeVariant = (props) => {
-  const { products, openCart, checkoutState, addVariant } = useShopify();
+  const { products, openCart, cartState, addVariant } = useShopify();
 
   const { description, product } = props;
   const [click, setClicked] = useState();
@@ -15,18 +15,18 @@ export const SizeVariant = (props) => {
   function changeSize(sizeId, quantity) {
     openCart();
     if (sizeId === '') {
-      sizeId = products[prodIndex].variants[0].id;
+      sizeId = products[prodIndex]?.variants?.edges?.[0]?.node?.id;
       const lineItemsToAdd = [
         { variantId: sizeId, quantity: parseInt(quantity, 10) },
       ];
-      const checkoutId = checkoutState.id;
-      addVariant(checkoutId, lineItemsToAdd);
+      const cartId = cartState.id;
+      addVariant(cartId, lineItemsToAdd);
     } else {
       const lineItemsToAdd = [
         { variantId: sizeId, quantity: parseInt(quantity, 10) },
       ];
-      const checkoutId = checkoutState.id;
-      addVariant(checkoutId, lineItemsToAdd);
+      const cartId = cartState.id;
+      addVariant(cartId, lineItemsToAdd);
     }
   }
 
@@ -62,23 +62,24 @@ export const SizeVariant = (props) => {
           paddingBottom: '10px',
         }}
       >
-        {product.variants &&
-          product.variants.map((variant, item) => {
-            const varWidth = 100 / product.variants.length;
+        {product.variants?.edges &&
+          product.variants.edges.map((edge, item) => {
+            const variant = edge.node;
+            const varWidth = 100 / product.variants.edges.length;
             return (
               <div
                 key={variant.title + item}
                 onClick={(e) => {
                   setSize(variant.id.toString());
                   setClicked(item);
-                  setAvailable(variant.available);
+                  setAvailable(variant.availableForSale);
                   setSizeSelected(true);
                 }}
                 className="Prod-font-size"
                 style={{
                   cursor: 'pointer',
                   width: `${varWidth}%`,
-                  color: variant.available
+                  color: variant.availableForSale
                     ? `${click === item ? '#FF09B1' : 'black'}`
                     : 'grey',
                 }}

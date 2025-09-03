@@ -18,7 +18,7 @@ export default function ProductList() {
       <Row>
         {products &&
           products.map((product, i) => {
-            return <SingleProduct i={i} key={i} product={product} />;
+            return <SingleProduct i={i} key={product.id || i} product={product} />;
           })}
       </Row>
     </Container>
@@ -28,7 +28,7 @@ export default function ProductList() {
 function SingleProduct(props) {
   const { product } = props;
   const navigate = useNavigate();
-  const completelySoldOut = useCheckCompleteSoldOut(product.variants);
+  const completelySoldOut = useCheckCompleteSoldOut(product.variants?.edges?.map(edge => edge.node) || []);
 
   const handleRoute = () => {
     navigate(`/product/${product?.handle}`);
@@ -49,7 +49,11 @@ function SingleProduct(props) {
         onClick={() => handleRoute()}
         style={{ cursor: 'pointer' }}
       >
-        <img src={product.images[0].src} className="img-drag" alt="product" />
+        <img 
+          src={product.images?.edges?.[0]?.node?.url || '/placeholder-image.jpg'} 
+          className="img-drag" 
+          alt={product.title || 'product'} 
+        />
       </div>
 
       <div

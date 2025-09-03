@@ -1,20 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
-import Client from 'shopify-buy';
-
-// const client = Client.buildClient({
-//   storefrontAccessToken: "dd4d4dc146542ba7763305d71d1b3d38",
-//   domain: "graphql.myshopify.com",
-// })
-
-const client = Client.buildClient({
-  storefrontAccessToken: '7139a1b0c3a5fec6dd28f380632ffbd7',
-  domain: 'dabrazn1.myshopify.com',
-});
+import { useCallback } from 'react';
+import shopifyClient from '../../../shopifyClient';
 
 const PRODUCTS_FOUND = 'shopify/PRODUCTS_FOUND';
 const PRODUCT_FOUND = 'shopify/PRODUCT_FOUND';
 const COLLECTION_FOUND = 'shopify/COLLECTION_FOUND';
-const CHECKOUT_FOUND = 'shopify/CHECKOUT_FOUND';
+const CART_FOUND = 'shopify/CART_FOUND';
 const SHOP_FOUND = 'shopify/SHOP_FOUND';
 const ADD_VARIANT_TO_CART = 'shopify/ADD_VARIANT_TO_CART';
 const UPDATE_QUANTITY_IN_CART = 'shopify/UPDATE_QUANTITY_IN_CART';
@@ -26,14 +17,14 @@ const CART_COUNT = 'shopify/CART_COUNT';
 const initialState = {
   isCartOpen: false,
   cartCount: 0,
-  checkout: {},
+  cart: {},
   products: [],
   featured: [],
   product: {},
   shop: {},
 };
 
-export default (state = initialState, action) => {
+const shopifyReducer = (state = initialState, action) => {
   switch (action.type) {
     case PRODUCTS_FOUND:
       return { ...state, products: action.payload };
@@ -41,16 +32,16 @@ export default (state = initialState, action) => {
       return { ...state, product: action.payload };
     case COLLECTION_FOUND:
       return { ...state, featured: action.payload };
-    case CHECKOUT_FOUND:
-      return { ...state, checkout: action.payload };
+    case CART_FOUND:
+      return { ...state, cart: action.payload };
     case SHOP_FOUND:
       return { ...state, shop: action.payload };
     case ADD_VARIANT_TO_CART:
-      return { ...state, checkout: action.payload };
+      return { ...state, cart: action.payload };
     case UPDATE_QUANTITY_IN_CART:
-      return { ...state, checkout: action.payload };
+      return { ...state, cart: action.payload };
     case REMOVE_LINE_ITEM_IN_CART:
-      return { ...state, checkout: action.payload };
+      return { ...state, cart: action.payload };
     case OPEN_CART:
       return { ...state, isCartOpen: true };
     case CLOSE_CART:
@@ -62,28 +53,36 @@ export default (state = initialState, action) => {
   }
 };
 
+export default shopifyReducer;
+
 // Gets all the products from Shopify
 function getProducts() {
-  return (dispatch) => {
-    client.product.fetchAll().then((resp) => {
+  return async (dispatch) => {
+    try {
+      const products = await shopifyClient.getProducts();
       dispatch({
         type: PRODUCTS_FOUND,
-        payload: resp,
+        payload: products,
       });
-    });
+    } catch (error) {
+      console.error('Failed to fetch products:', error);
+    }
   };
 }
 
 // Gets individual item based on id
 function getProduct(handle) {
-  // console.log
   return async (dispatch) => {
-    const resp = await client.product.fetchByHandle(handle);
-    dispatch({
-      type: PRODUCT_FOUND,
-      payload: resp,
-    });
-    return resp;
+    try {
+      const product = await shopifyClient.getProduct(handle);
+      dispatch({
+        type: PRODUCT_FOUND,
+        payload: product,
+      });
+      return product;
+    } catch (error) {
+      console.error('Failed to fetch product:', error);
+    }
   };
 }
 
@@ -102,73 +101,84 @@ function getProduct(handle) {
 // 	}
 // }
 
-// Creates initial checkout state from Shopify
-function checkout() {
-  return (dispatch) => {
-    client.checkout.create().then((resp) => {
+// Creates initial cart state from Shopify
+function createCart() {
+  return async (dispatch) => {
+    try {
+      const cart = await shopifyClient.createCart();
       dispatch({
-        type: CHECKOUT_FOUND,
-        payload: resp,
+        type: CART_FOUND,
+        payload: cart,
       });
-    });
+    } catch (error) {
+      console.error('Failed to create cart:', error);
+    }
   };
 }
 
 // Gets Shopify store information
 function shopInfo() {
-  return (dispatch) => {
-    client.shop.fetchInfo().then((resp) => {
+  return async (dispatch) => {
+    try {
+      const shop = await shopifyClient.getShop();
       dispatch({
         type: SHOP_FOUND,
-        payload: resp,
+        payload: shop,
       });
-    });
+    } catch (error) {
+      console.error('Failed to fetch shop info:', error);
+    }
   };
 }
 
-// Adds variants to cart/checkout
-function addVariantToCart(checkoutId, lineItemsToAdd) {
+// Adds variants to cart
+function addVariantToCart(cartId, lineItemsToAdd) {
   return async (dispatch) => {
-    const response = await client.checkout.addLineItems(
-      checkoutId,
-      lineItemsToAdd
-    );
-    dispatch({
-      type: ADD_VARIANT_TO_CART,
-      payload: response,
-    });
-    return response;
+    try {
+      const cart = await shopifyClient.addLineItems(cartId, lineItemsToAdd);
+      dispatch({
+        type: ADD_VARIANT_TO_CART,
+        payload: cart,
+      });
+      return cart;
+    } catch (error) {
+      console.error('Failed to add variant to cart:', error);
+    }
   };
 }
 
-// Updates quantity of line items in cart and in checkout state
-function updateQuantityInCart(lineItemId, quantity, checkoutId) {
+// Updates quantity of line items in cart
+function updateQuantityInCart(lineItemId, quantity, cartId) {
   const lineItemsToUpdate = [
     { id: lineItemId, quantity: parseInt(quantity, 10) },
   ];
 
   return async (dispatch) => {
-    const resp = await client.checkout.updateLineItems(
-      checkoutId,
-      lineItemsToUpdate
-    );
-    dispatch({
-      type: UPDATE_QUANTITY_IN_CART,
-      payload: resp,
-    });
-    return resp;
+    try {
+      const cart = await shopifyClient.updateLineItems(cartId, lineItemsToUpdate);
+      dispatch({
+        type: UPDATE_QUANTITY_IN_CART,
+        payload: cart,
+      });
+      return cart;
+    } catch (error) {
+      console.error('Failed to update quantity in cart:', error);
+    }
   };
 }
 
-// Removes line item from cart and checkout state
-function removeLineItemInCart(checkoutId, lineItemId) {
-  return (dispatch) => {
-    client.checkout.removeLineItems(checkoutId, [lineItemId]).then((resp) => {
+// Removes line item from cart
+function removeLineItemInCart(cartId, lineItemId) {
+  return async (dispatch) => {
+    try {
+      const cart = await shopifyClient.removeLineItems(cartId, [lineItemId]);
       dispatch({
         type: REMOVE_LINE_ITEM_IN_CART,
-        payload: resp,
+        payload: cart,
       });
-    });
+    } catch (error) {
+      console.error('Failed to remove line item from cart:', error);
+    }
   };
 }
 
@@ -203,39 +213,39 @@ export function useShopify() {
   const products = useSelector((appState) => appState.shopifyState.products);
   const product = useSelector((appState) => appState.shopifyState.product);
   const featured = useSelector((appState) => appState.shopifyState.featured);
-  const checkoutState = useSelector(
-    (appState) => appState.shopifyState.checkout
+  const cartState = useSelector(
+    (appState) => appState.shopifyState.cart
   );
   const shopDetails = useSelector((appState) => appState.shopifyState.shop);
-  const fetchProducts = () => dispatch(getProducts());
-  const fetchProduct = (handle) => dispatch(getProduct(handle));
+  const fetchProducts = useCallback(() => dispatch(getProducts()), [dispatch]);
+  const fetchProduct = useCallback((handle) => dispatch(getProduct(handle)), [dispatch]);
   // const fetchCollection = () => dispatch(getCollection())
-  const createCheckout = () => dispatch(checkout());
-  const createShop = () => dispatch(shopInfo());
-  const closeCart = () => dispatch(handleCartClose());
-  const openCart = () => dispatch(handleCartOpen());
-  const setCount = (count) => dispatch(handleSetCount(count));
+  const createCartAction = useCallback(() => dispatch(createCart()), [dispatch]);
+  const createShop = useCallback(() => dispatch(shopInfo()), [dispatch]);
+  const closeCart = useCallback(() => dispatch(handleCartClose()), [dispatch]);
+  const openCart = useCallback(() => dispatch(handleCartOpen()), [dispatch]);
+  const setCount = useCallback((count) => dispatch(handleSetCount(count)), [dispatch]);
 
-  const addVariant = (checkoutId, lineItemsToAdd) =>
-    dispatch(addVariantToCart(checkoutId, lineItemsToAdd));
-  const updateQuantity = (lineItemId, quantity, checkoutID) =>
-    dispatch(updateQuantityInCart(lineItemId, quantity, checkoutID));
-  const removeLineItem = (checkoutId, lineItemId) =>
-    dispatch(removeLineItemInCart(checkoutId, lineItemId));
+  const addVariant = useCallback((cartId, lineItemsToAdd) =>
+    dispatch(addVariantToCart(cartId, lineItemsToAdd)), [dispatch]);
+  const updateQuantity = useCallback((lineItemId, quantity, cartId) =>
+    dispatch(updateQuantityInCart(lineItemId, quantity, cartId)), [dispatch]);
+  const removeLineItem = useCallback((cartId, lineItemId) =>
+    dispatch(removeLineItemInCart(cartId, lineItemId)), [dispatch]);
 
   return {
     products,
     product,
     featured,
     cartStatus,
-    checkoutState,
+    cartState,
     cartCount,
     shopDetails,
     addVariant,
     fetchProducts,
     fetchProduct,
     // fetchCollection,
-    createCheckout,
+    createCart: createCartAction,
     createShop,
     closeCart,
     openCart,

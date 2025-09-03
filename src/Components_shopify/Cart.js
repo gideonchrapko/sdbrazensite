@@ -4,7 +4,7 @@ import LineItem from './LineItem';
 import { useShopify } from '../hooks';
 
 export default function Cart() {
-  const { cartStatus, closeCart, checkoutState, setCount } = useShopify();
+  const { cartStatus, closeCart, cartState, setCount } = useShopify();
 
   function handleClose(e) {
     e.preventDefault();
@@ -13,14 +13,14 @@ export default function Cart() {
 
   function openCheckout(e) {
     e.preventDefault();
-    window.location.replace(checkoutState.webUrl);
+    window.location.replace(cartState.checkoutUrl);
   }
 
   useEffect(() => {
     function getCount() {
       let lineItems =
-        checkoutState.lineItems && checkoutState.lineItems.length > 0
-          ? checkoutState.lineItems
+        cartState.lines && cartState.lines.edges && cartState.lines.edges.length > 0
+          ? cartState.lines.edges.map(edge => edge.node)
           : [];
       let count = 0;
       lineItems.forEach((item) => {
@@ -30,7 +30,7 @@ export default function Cart() {
       setCount(count);
     }
     getCount();
-  }, [cartStatus, checkoutState]);
+  }, [cartStatus, cartState, setCount]);
 
   return (
     <>
@@ -79,11 +79,11 @@ export default function Cart() {
                     style={{ textAlign: 'right' }}
                     className="lineitem-item-text"
                   >
-                    {checkoutState.totalPrice &&
-                      checkoutState.totalPrice.currencyCode}
+                    {cartState.cost?.totalAmount &&
+                      cartState.cost.totalAmount.currencyCode}
                     $
-                    {checkoutState.totalPrice &&
-                      checkoutState.totalPrice.amount}
+                    {cartState.cost?.totalAmount &&
+                      cartState.cost.totalAmount.amount}
                     0
                   </h3>
                 </Col>

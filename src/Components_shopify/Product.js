@@ -28,42 +28,42 @@ const ImageDots = ({ images, currentIndex }) => {
 };
 
 export default function Product() {
-  const { product, fetchProduct, openCart, checkoutState, addVariant } =
+  const { product, fetchProduct, openCart, cartState, addVariant } =
     useShopify();
   const { productHandle } = useParams();
   const [size, setSize] = useState('');
   const [click, setClicked] = useState(false);
-  const [available, setAvailable] = useState(true);
+  const [, setAvailable] = useState(true);
   const [sizeSelected, setSizeSelected] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const description = product?.description && product?.description.split('.');
   const [imageIndex, setImageIndex] = useState(0);
   const imagesContainerRef = useRef(null);
-  const variants = product?.variants;
+  const variants = product?.variants?.edges?.map(edge => edge.node) || [];
   const completelySoldOut = useCheckCompleteSoldOut(variants);
-  const hideVariants = product?.variants?.length === 1;
+  const hideVariants = variants?.length === 1;
 
   function changeSize(sizeId, quantity) {
     openCart();
     if (sizeId === '') {
-      sizeId = product?.variants[0].id;
+      sizeId = variants[0]?.id;
       const lineItemsToAdd = [
         { variantId: sizeId, quantity: parseInt(quantity, 10) },
       ];
-      const checkoutId = checkoutState?.id;
-      addVariant(checkoutId, lineItemsToAdd);
+      const cartId = cartState?.id;
+      addVariant(cartId, lineItemsToAdd);
     } else {
       const lineItemsToAdd = [
         { variantId: sizeId, quantity: parseInt(quantity, 10) },
       ];
-      const checkoutId = checkoutState?.id;
-      addVariant(checkoutId, lineItemsToAdd);
+      const cartId = cartState?.id;
+      addVariant(cartId, lineItemsToAdd);
     }
   }
 
   useEffect(() => {
     fetchProduct(productHandle);
-  }, [productHandle]);
+  }, [productHandle, fetchProduct]);
 
   const handleImageClickScroll = (index) => {
     setImageIndex(index);
@@ -111,11 +111,11 @@ export default function Product() {
           ref={imagesContainerRef}
           className="mobile-hiding"
         >
-          {product?.images &&
-            product.images.map((image, i) => (
+          {product?.images?.edges &&
+            product.images.edges.map((edge, i) => (
               <motion.img
-                key={image.id}
-                src={image.src}
+                key={edge.node.id}
+                src={edge.node.url}
                 alt={`${product?.title} product shot`}
                 transition={{ duration: 0.5 }}
               />
@@ -123,14 +123,14 @@ export default function Product() {
         </Col>
         <Col style={{ height: '100vh', position: 'relative' }}>
           <div className="product-details-container">
-            {product?.images && (
+            {product?.images?.edges && (
               <div {...swipeHandlers}>
                 <div
                   className="desktop-hiding-images"
                   style={{ flexDirection: 'column', position: 'relative' }} // Ensure relative positioning for child elements
                 >
                   <motion.img
-                    src={product.images[imageIndex].src}
+                    src={product.images?.edges?.[imageIndex]?.node?.url || 'https://picsum.photos/400/400?random=1'}
                     style={{
                       height: '100%',
                       overflow: 'scroll',
@@ -142,7 +142,7 @@ export default function Product() {
                     transition={{ type: 'spring', stiffness: 300 }}
                   />
                   <ImageDots
-                    images={product.images}
+                    images={product.images.edges.map(edge => edge.node)}
                     currentIndex={imageIndex}
                   />
                 </div>
@@ -166,7 +166,7 @@ export default function Product() {
                   className="desktop-hiding-images"
                 >
                   <ImageSelector
-                    images={product?.images}
+                    images={product?.images?.edges?.map(edge => edge.node)}
                     title={product?.title}
                     handleImage={handleImageIndex}
                   />
@@ -178,7 +178,7 @@ export default function Product() {
                   </span>
                 </h3>
                 <h3 className="details-font">
-                  ${product.variants && product.variants[0].price.amount}0
+                  ${variants && variants[0]?.price?.amount}0
                 </h3>
                 <h3 className="shipping-calculated-text details-font">
                   Shipping Calculated at checkout
@@ -192,21 +192,21 @@ export default function Product() {
                     className="details-font"
                   >
                     Size:
-                    {product.variants &&
-                      product.variants.map((variant, item) => {
+                    {variants &&
+                      variants.map((variant, item) => {
                         return (
                           <div
                             key={variant.title + item}
                             onClick={(e) => {
                               setSize(variant.id.toString());
                               setClicked(item);
-                              setAvailable(variant.available);
+                              setAvailable(variant.availableForSale);
                               setSizeSelected(true);
                             }}
                             style={{
                               paddingLeft: '40px',
                               cursor: 'pointer',
-                              color: variant.available
+                              color: variant.availableForSale
                                 ? `${click === item ? '#FF09B1' : 'black'}`
                                 : 'grey',
                             }}
@@ -328,7 +328,7 @@ export default function Product() {
                   className="mobile-hiding-heloeleleoeoe"
                 >
                   <ImageSelector
-                    images={product?.images}
+                    images={product?.images?.edges?.map(edge => edge.node)}
                     title={product?.title}
                     handleImage={handleImageClickScroll}
                   />
@@ -356,7 +356,7 @@ function ImageSelector({ images, title, handleImage }) {
           return (
             <img
               key={image.id + i}
-              src={image.src}
+              src={image.url}
               alt={`${title} product shot`}
               style={{ width: '60px', cursor: 'pointer' }}
               onClick={() => handleImage(i)}

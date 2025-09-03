@@ -23,8 +23,8 @@ export default function ProductsPage(props) {
       <Row>
         {products &&
           products.map((product, i) => {
-            const image = product.images[0].src;
-            const price = product.variants[0].price.amount;
+            const image = product.images?.edges?.[0]?.node?.url || '/placeholder-image.jpg';
+            const price = product.variants?.edges?.[0]?.node?.price?.amount || '0';
             const description =
               product.description && product.description.split('.');
             return (

@@ -4,7 +4,7 @@ export function useCheckCompleteSoldOut(variants) {
   }
 
   const completelySoldOut = variants.every((variant) => {
-    return variant.available === false;
+    return variant.availableForSale === false;
   });
 
   return completelySoldOut;
