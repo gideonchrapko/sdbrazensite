@@ -1,10 +1,16 @@
+import { useMemo } from 'react';
 import { useShopify } from '../hooks';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useCheckCompleteSoldOut } from '../hooks/use-complete-sold-out';
+import { sortProductsForStore } from '../utils/sortProductsForStore';
 
 export default function ProductList() {
   const { products } = useShopify();
+  const orderedProducts = useMemo(
+    () => sortProductsForStore(products),
+    [products]
+  );
 
   return (
     <Container
@@ -16,8 +22,8 @@ export default function ProductList() {
       }}
     >
       <Row>
-        {products &&
-          products.map((product, i) => {
+        {orderedProducts &&
+          orderedProducts.map((product, i) => {
             return <SingleProduct i={i} key={product.id || i} product={product} />;
           })}
       </Row>
