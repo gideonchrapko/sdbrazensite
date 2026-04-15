@@ -5,8 +5,7 @@ const SHOPIFY_STOREFRONT_ACCESS_TOKEN = '7139a1b0c3a5fec6dd28f380632ffbd7';
 const SHOPIFY_DOMAIN = 'dabrazn1.myshopify.com';
 const API_VERSION = '2024-01';
 
-// Use the Shopify Storefront API URL with proxy for CORS handling
-const STOREFRONT_API_URL = `/api/${API_VERSION}/graphql.json`;
+const STOREFRONT_API_URL = `https://${SHOPIFY_DOMAIN}/api/${API_VERSION}/graphql.json`;
 
 // Flag to enable/disable mock mode for development
 const USE_MOCK_DATA = false; // Set to false to use real Shopify data
@@ -49,9 +48,8 @@ class ShopifyClient {
 
       return data.data;
     } catch (error) {
-      console.log('API request failed:', error.message);
-      // If API call fails, return null to trigger mock data fallback
-      return null;
+      console.error('API request failed:', error.message);
+      throw error;
     }
   }
 
