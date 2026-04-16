@@ -49,6 +49,12 @@ const Modal = ({ modalClose }) => {
             Discord: https://discord.gg/sDhGYwE8Vx
           </a>
         </div>
+        <p className="text-modal" style={{ marginTop: '15px' }}>
+          For all merch order inquiries please contact{' '}
+          <a href="mailto:orders@evolvepnd.com" style={{ color: 'black' }}>
+            orders@evolvepnd.com
+          </a>
+        </p>
         <p className="text-bottom-modal text-modal">
           ALL SALES FINAL PLEASE DOUBLE CHECK YOUR SIZE AND ADDRESS. Thank you
           &lt;3
