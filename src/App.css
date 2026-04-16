@@ -698,21 +698,7 @@ h2 {
 
 .text-bottom-modal {
   color: black;
-  position: absolute;
-  bottom: 0;
-  .text-modal {
-    font-family: lucon;
-    font-size: 15pt;
-    line-height: 1;
-    color: black;
-    max-width: 500px;
-  }
-}
-
-.text-bottom-modal {
-  color: black;
-  position: absolute;
-  bottom: 0;
+  margin-top: 15px;
 }
 
 .div-home {

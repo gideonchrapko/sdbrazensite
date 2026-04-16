@@ -16,6 +16,7 @@ const Modal = ({ modalClose }) => {
           background: 'white',
           padding: '25px',
           zIndex: 999999999,
+          overflowY: 'auto',
         }}
         className="model-size"
       >
